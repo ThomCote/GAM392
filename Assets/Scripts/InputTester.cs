@@ -7,6 +7,8 @@ public class InputTester : MonoBehaviour {
 
 	public string inputButton;
 
+	public SoundPlayer soundPlayer;
+
 	Image img;
 
 	float goodMargin;
@@ -28,6 +30,9 @@ public class InputTester : MonoBehaviour {
 
 			if (timePastSubdivision < goodMargin || timeToNext < goodMargin)
 			{
+				// Play the sound associated with this input.
+				soundPlayer.PlaySound();
+
 				if (timePastSubdivision < perfectMargin || timeToNext < perfectMargin)
 				{
 					// Perfect

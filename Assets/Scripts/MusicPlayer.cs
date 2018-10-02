@@ -23,6 +23,6 @@ public class MusicPlayer : MonoBehaviour {
 
 	public void PlayMusic(float scheduleTime)
 	{
-		audSrc.PlayScheduled(scheduleTime);
+		audSrc.PlayScheduled(AudioSettings.dspTime + scheduleTime);
 	}
 }

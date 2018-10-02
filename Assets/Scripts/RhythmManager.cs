@@ -176,7 +176,7 @@ public class RhythmManager : MonoBehaviour {
 			}
 		}
 
-		Debug.Log("TotalSubCount: " + totalSubdivisionCount);
+		// Debug.Log("TotalSubCount: " + totalSubdivisionCount);
 	}
 
 	void OnBeat()
