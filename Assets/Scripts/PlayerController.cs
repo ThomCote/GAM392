@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	public int maxHP;
+	int curHP;
+
 	PlayerFSM fsm;
 
 	// Use this for initialization
@@ -19,5 +22,20 @@ public class PlayerController : MonoBehaviour {
 	public void HandleInput(string inputName)
 	{
 		fsm.HandleInput(inputName);
+	}
+
+	void TakeDamage(int dmg)
+	{
+		curHP -= dmg;
+
+		if (curHP <= 0)
+		{
+			Die();
+		}
+	}
+
+	void Die()
+	{
+
 	}
 }
