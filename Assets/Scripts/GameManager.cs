@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
 	public PlayerController playerController;
 
+	public EnemyController currentEnemy;
+
 	void Awake()
 	{
 		if (!instance)
@@ -30,5 +32,10 @@ public class GameManager : MonoBehaviour {
 	public static PlayerController GetPlayerController()
 	{
 		return instance.playerController;
+	}
+
+	public static void DamageEnemy(int dmg)
+	{
+		instance.currentEnemy.TakeDamage(dmg);
 	}
 }

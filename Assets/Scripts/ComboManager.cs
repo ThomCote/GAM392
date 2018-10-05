@@ -11,11 +11,13 @@ public class ComboManager : MonoBehaviour {
 	// Highest number of subdivisions we'll wait for another input to an ongoing combo.
 	public int maxComboWaitTime;
 
+	bool comboOngoing = false;
+
 	bool acceptSixteenths;
 
 	List<int> currentCombo = new List<int>();
 	List<int> comboNoteLengths = new List<int>();
-	float currentComboDamage;
+	int currentComboDamage;
 	long lastHitSubdivisionCount = 0; // The last subdivision overall that a hit was hit on
 
 	public Text comboText;
@@ -58,7 +60,7 @@ public class ComboManager : MonoBehaviour {
 
 		long currentSubTotal = RhythmManager.GetTotalSubdivisionCount();
 
-		if (currentSubTotal - lastHitSubdivisionCount > maxComboWaitTime)
+		if (comboOngoing && currentSubTotal - lastHitSubdivisionCount > maxComboWaitTime)
 		{
 			// End ongoing combo successfully
 			FinishCombo();
@@ -73,6 +75,8 @@ public class ComboManager : MonoBehaviour {
 
 	void AddHit_Private(int hitIndex, long hitTotalSubdivisionCount)
 	{
+		comboOngoing = true;
+
 		// Update takes care of combo time-outs / finishes
 		long subsSinceLastHit;
 		if (lastHitSubdivisionCount == -1)
@@ -118,7 +122,7 @@ public class ComboManager : MonoBehaviour {
 		// and if a combo ends successfully the last one automatically gets 4 points.
 		// (Maybe give extra points for finishing a particularly long combo?)
 
-		float hitValue = 0.0f;
+		int hitValue = 0;
 
 		if (acceptSixteenths)
 		{
@@ -126,16 +130,16 @@ public class ComboManager : MonoBehaviour {
 			{
 				case -1:
 					// First hit, don't score yet
-					hitValue = 0.0f;
+					hitValue = 0;
 					break;
 				case 4:
-					hitValue = 4.0f;
+					hitValue = 8;
 					break;
 				case 2:
-					hitValue = 2.5f;
+					hitValue = 5;
 					break;
 				default:
-					hitValue = 1.5f;
+					hitValue = 3;
 					break;
 			}
 		}
@@ -145,13 +149,13 @@ public class ComboManager : MonoBehaviour {
 			{
 				case -1:
 					// First hit, don't score yet
-					hitValue = 0.0f;
+					hitValue = 0;
 					break;
 				case 2:
-					hitValue = 4.0f;
+					hitValue = 8;
 					break;
 				default:
-					hitValue = 2.5f;
+					hitValue = 5;
 					break;
 			}
 		}
@@ -164,10 +168,13 @@ public class ComboManager : MonoBehaviour {
 
 	void FinishCombo()
 	{
+		comboOngoing = false;
+
 		// Add an extra 4 points for the last note
-		currentComboDamage += 4.0f;
+		currentComboDamage += 8;
 
 		// TODO - This'll involve applying the damage you've built up for your attack
+		GameManager.DamageEnemy(currentComboDamage);
 
 		// Reset text
 		comboText.text = "Current Combo:";
@@ -176,7 +183,7 @@ public class ComboManager : MonoBehaviour {
 		currentCombo.Clear();
 		comboNoteLengths.Clear();
 
-		currentComboDamage = 0.0f;
+		currentComboDamage = 0;
 
 		lastHitSubdivisionCount = -1;
 	}
@@ -195,7 +202,7 @@ public class ComboManager : MonoBehaviour {
 		currentCombo.Clear();
 		comboNoteLengths.Clear();
 
-		currentComboDamage = 0.0f;
+		currentComboDamage = 0;
 
 		lastHitSubdivisionCount = -1;
 
