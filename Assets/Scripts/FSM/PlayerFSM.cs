@@ -24,14 +24,12 @@ public class PlayerFSM : MonoBehaviour {
     void Update()
     {
         stateMachine.Update();
-        HandleInput();
     }
 
-    void HandleInput()
+    public void HandleInput(string inputName)
     {
-        stateMachine.HandleInput();
+        stateMachine.HandleInput(inputName);
     }
-
 }
 
 

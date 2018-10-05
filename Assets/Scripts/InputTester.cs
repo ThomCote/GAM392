@@ -9,6 +9,8 @@ public class InputTester : MonoBehaviour {
 
 	public SoundPlayer soundPlayer;
 
+	PlayerController playerController;
+
 	Image img;
 
 	float goodMargin;
@@ -18,6 +20,7 @@ public class InputTester : MonoBehaviour {
 	void Start () {
 		img = GetComponent<Image>();
 		RhythmManager.GetInputMargins(out goodMargin, out perfectMargin);
+		playerController = GameManager.GetPlayerController();
 	}
 	
 	// Update is called once per frame
@@ -55,6 +58,9 @@ public class InputTester : MonoBehaviour {
 					// We're closer to the next subdivision number
 					RhythmManager.OnInputSuccess(true);
 				}
+
+				// Alert the player character FSM
+				playerController.HandleInput(inputButton);
 			}
 			else
 			{

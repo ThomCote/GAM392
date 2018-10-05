@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
 
 	static GameManager instance;
 
+	public PlayerController playerController;
+
 	void Awake()
 	{
 		if (!instance)
@@ -23,5 +25,10 @@ public class GameManager : MonoBehaviour {
 	void Startup()
 	{
 		
+	}
+
+	public static PlayerController GetPlayerController()
+	{
+		return instance.playerController;
 	}
 }

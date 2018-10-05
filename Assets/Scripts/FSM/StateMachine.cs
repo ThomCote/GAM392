@@ -32,9 +32,9 @@ public class StateMachine
         if (currentState != null) currentState.Execute();
     }
     
-    public void HandleInput()
+    public void HandleInput(string inputName)
     {
-       if (currentState != null) currentState.HandleInput();
+       if (currentState != null) currentState.HandleInput(inputName);
     }
 }
 

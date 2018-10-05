@@ -28,7 +28,7 @@ public class WalkState : IState
         ani.SetBool("isWalking", true);
     }
 
-    public void HandleInput()
+    public void HandleInput(string inputStr)
     {
         if (Input.GetKeyUp(KeyCode.D))
         {

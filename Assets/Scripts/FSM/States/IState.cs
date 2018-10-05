@@ -6,6 +6,6 @@ public interface IState
 {
     void Enter();
     void Execute();
-    void HandleInput();
+    void HandleInput(string inputName);
     void Exit();
 }

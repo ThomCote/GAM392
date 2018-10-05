@@ -29,7 +29,7 @@ public class LightPunchState : IState
         sM.ChangeState("idle");
     }
 
-    public void HandleInput()
+    public void HandleInput(string inputStr)
     {
         //Going to have to check for combo inputs eventually
 

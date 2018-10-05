@@ -31,7 +31,7 @@ public class KickState : IState
         sM.ChangeState("idle");
     }
 
-    public void HandleInput()
+    public void HandleInput(string inputStr)
     {
 
     }
