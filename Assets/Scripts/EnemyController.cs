@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour {
 
 	public Text healthText;
 
+	bool attacking;
+
 	// Use this for initialization
 	void Start () {
 		curHP = maxHP;
@@ -18,7 +20,11 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (attacking)
+		{
+			// Attack :O
+
+		}
 	}
 
 	public void TakeDamage(int dmg)
@@ -41,5 +47,10 @@ public class EnemyController : MonoBehaviour {
 	void UpdateHPText()
 	{
 		healthText.text = "Enemy HP: " + curHP;
+	}
+
+	public void ToggleAttacking()
+	{
+		attacking = !attacking;
 	}
 }

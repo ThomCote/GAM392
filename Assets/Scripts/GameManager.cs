@@ -51,5 +51,18 @@ public class GameManager : MonoBehaviour {
 		++instance.currentMeasure;
 
 		instance.currentMeasureText.text = "Current Measure: " + instance.currentMeasure;
+
+		// Current - 1 because it'll switch on measures 9, 17, etc not on 8, 16, etc.
+		if ((instance.currentMeasure - 1) % instance.combatPhaseLength == 0)
+		{
+			instance.ChangeCombatPhase();
+		}
+	}
+
+	void ChangeCombatPhase()
+	{
+		instance.playerController.ToggleInputActive();
+
+		instance.currentEnemy.ToggleAttacking();
 	}
 }

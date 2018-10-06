@@ -9,6 +9,8 @@ public class InputTester : MonoBehaviour {
 
 	public SoundPlayer soundPlayer;
 
+	public bool onlyPlayersTurn = true;
+
 	PlayerController playerController;
 
 	Image img;
@@ -24,8 +26,12 @@ public class InputTester : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	public void TriggeredUpdate ()
+	{
+		if (onlyPlayersTurn && !playerController.GetInputActive())
+		{
+			return;
+		}
 		if (Input.GetButtonDown(inputButton))
 		{
 			float timePastSubdivision = RhythmManager.GetTimePastCurrentSubdivision();

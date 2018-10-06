@@ -15,6 +15,8 @@ public class RhythmManager : MonoBehaviour {
 
 	public int beatsPerMeasure = 4;
 
+	public InputTester[] inputTesters;
+
 	public float tempo;
 	public float goodMargin;
 	public float perfectMargin;
@@ -123,12 +125,15 @@ public class RhythmManager : MonoBehaviour {
 
 				++currentSubdivisionCount;
 
+				if (currentSubdivisionCount == 15)
+				{
+					// We've moved onto a new measure
+					GameManager.IncrementMeasure();
+				}
+
 				if (currentSubdivisionCount == 16)
 				{
 					currentSubdivisionCount = 0;
-
-					// We've moved onto a new measure
-					GameManager.IncrementMeasure();
 				}
 
 				sixteenthNoteCounter.text = (currentSubdivisionCount + 1).ToString();
@@ -164,13 +169,15 @@ public class RhythmManager : MonoBehaviour {
 				curSubdivisionTime = curSubdivisionTime - eighthNoteLength;
 
 				++currentSubdivisionCount;
+				if (currentSubdivisionCount == 7)
+				{
+					// We've moved onto a new measure
+					GameManager.IncrementMeasure();
+				}
 
 				if (currentSubdivisionCount == 8)
 				{
 					currentSubdivisionCount = 0;
-
-					// We've moved onto a new measure
-					GameManager.IncrementMeasure();
 				}
 
 				eighthNoteCounter.text = (currentSubdivisionCount + 1).ToString();
@@ -186,6 +193,12 @@ public class RhythmManager : MonoBehaviour {
 		}
 
 		// Debug.Log("TotalSubCount: " + totalSubdivisionCount);
+
+		// Update input testers
+		foreach (InputTester tester in inputTesters)
+		{
+			tester.TriggeredUpdate();
+		}
 	}
 
 	void OnBeat()

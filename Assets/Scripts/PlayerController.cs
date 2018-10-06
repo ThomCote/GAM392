@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 
 	PlayerFSM fsm;
 
+	bool inputActive;
+
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
@@ -21,7 +23,10 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput(string inputName)
 	{
-		fsm.HandleInput(inputName);
+		if (inputActive)
+		{
+			fsm.HandleInput(inputName);
+		}
 	}
 
 	void TakeDamage(int dmg)
@@ -37,5 +42,15 @@ public class PlayerController : MonoBehaviour {
 	void Die()
 	{
 
+	}
+
+	public void ToggleInputActive()
+	{
+		inputActive = !inputActive;
+	}
+
+	public bool GetInputActive()
+	{
+		return inputActive;
 	}
 }
