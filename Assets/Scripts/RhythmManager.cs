@@ -151,7 +151,7 @@ public class RhythmManager : MonoBehaviour {
 
 				}
 
-				OnBeat();
+				OnSubdivision();
 			}
 		}
 		else
@@ -188,7 +188,7 @@ public class RhythmManager : MonoBehaviour {
 					quarterNoteCounter.text = quarterNoteCount.ToString();
 				}
 
-				OnBeat();
+				OnSubdivision();
 			}
 		}
 
@@ -201,7 +201,7 @@ public class RhythmManager : MonoBehaviour {
 		}
 	}
 
-	void OnBeat()
+	void OnSubdivision()
 	{
 		if (acceptSixteenths)
 		{
@@ -233,7 +233,9 @@ public class RhythmManager : MonoBehaviour {
 				audSrc.Play();
 			}
 		}
-		
+
+		// Stuff that happens on all beats
+		GameManager.OnSubdivision(currentSubdivisionCount);
 	}
 
 	public static void OnInputSuccess(bool nextSubdivision)

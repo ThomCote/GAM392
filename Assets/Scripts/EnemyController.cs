@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour {
+public abstract class EnemyController : MonoBehaviour {
 
 	public int maxHP;
 	int curHP;
 
 	public Text healthText;
 
-	bool attacking;
+	protected bool attacking;
 
 	// Use this for initialization
 	void Start () {
@@ -20,12 +20,12 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (attacking)
-		{
-			// Attack :O
-
-		}
+		
 	}
+
+	// Behavior per-subdivision, driven by rhythm system.
+	// Assuming 16th note subdivisions.
+	public abstract void OnSubdivision(int sub);
 
 	public void TakeDamage(int dmg)
 	{
@@ -37,6 +37,11 @@ public class EnemyController : MonoBehaviour {
 		{
 			Die();
 		}
+	}
+
+	protected void DealDamage(int dmg)
+	{
+		GameManager.DamagePlayer(dmg);
 	}
 
 	void Die()

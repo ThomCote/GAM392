@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,11 +10,15 @@ public class PlayerController : MonoBehaviour {
 
 	PlayerFSM fsm;
 
-	bool inputActive;
+	bool inputActive = true;
+
+	public Text hpText;
 
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
+		curHP = maxHP;
+		UpdateHPText();
 	}
 	
 	// Update is called once per frame
@@ -29,9 +34,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void TakeDamage(int dmg)
+	public void TakeDamage(int dmg)
 	{
 		curHP -= dmg;
+
+		UpdateHPText();
 
 		if (curHP <= 0)
 		{
@@ -52,5 +59,10 @@ public class PlayerController : MonoBehaviour {
 	public bool GetInputActive()
 	{
 		return inputActive;
+	}
+
+	void UpdateHPText()
+	{
+		hpText.text = "Player HP: " + curHP;
 	}
 }

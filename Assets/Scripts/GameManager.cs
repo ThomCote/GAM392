@@ -41,9 +41,23 @@ public class GameManager : MonoBehaviour {
 		return instance.playerController;
 	}
 
+	public static void DamagePlayer(int dmg)
+	{
+		instance.playerController.TakeDamage(dmg);
+	}
+
 	public static void DamageEnemy(int dmg)
 	{
 		instance.currentEnemy.TakeDamage(dmg);
+	}
+
+	// Called every subdivision of a measure
+	public static void OnSubdivision(int subCount)
+	{
+		// Just accepting 16th notes by default for now
+
+		// Trigger any enemy behaviors
+		instance.currentEnemy.OnSubdivision(subCount);
 	}
 
 	public static void IncrementMeasure()
