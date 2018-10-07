@@ -11,6 +11,8 @@ public class ComboManager : MonoBehaviour {
 	// Highest number of subdivisions we'll wait for another input to an ongoing combo.
 	public int maxComboWaitTime;
 
+	public AudioSource failSoundPlayer;
+
 	bool comboOngoing = false;
 
 	bool acceptSixteenths;
@@ -195,6 +197,10 @@ public class ComboManager : MonoBehaviour {
 
 	void FailCombo_Private()
 	{
+		failSoundPlayer.Play();
+
+		comboOngoing = false;
+
 		// Reset text
 		comboText.text = "Current Combo:";
 

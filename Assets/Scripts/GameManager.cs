@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 
 	public Text currentMeasureText;
 
+	public MusicPlayer musicPlayer;
+
 	int currentMeasure = 1;
 
 	void Awake()
@@ -75,8 +77,10 @@ public class GameManager : MonoBehaviour {
 
 	void ChangeCombatPhase()
 	{
-		instance.playerController.ToggleInputActive();
+		playerController.ToggleInputActive();
 
-		instance.currentEnemy.ToggleAttacking();
+		currentEnemy.ToggleAttacking();
+
+		musicPlayer.SwapMusic();
 	}
 }
