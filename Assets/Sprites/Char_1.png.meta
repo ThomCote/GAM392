@@ -46,8 +46,8 @@ TextureImporter:
     21300082: Char_1_41
     21300084: Char_1_42
     21300086: Char_1_43
-    21300088: Char_1_44
-    21300090: Char_1_45
+    21300088: Char_1_Block1
+    21300090: Char_1_Block2
     21300092: Char_1_46
     21300094: Char_1_47
     21300096: Char_1_48
@@ -1072,11 +1072,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_44
+      name: Char_1_Block1
       rect:
         serializedVersion: 2
         x: 18
-        y: 778
+        y: 777
         width: 25
         height: 40
       alignment: 0
@@ -1092,7 +1092,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_45
+      name: Char_1_Block2
       rect:
         serializedVersion: 2
         x: 85
