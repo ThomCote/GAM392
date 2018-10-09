@@ -48,9 +48,9 @@ TextureImporter:
     21300086: Char_1_43
     21300088: Char_1_Block1
     21300090: Char_1_Block2
-    21300092: Char_1_46
+    21300092: Char_1_hurt1
     21300094: Char_1_47
-    21300096: Char_1_48
+    21300096: Char_1_hurt2
     21300098: Char_1_49
     21300100: Char_1_50
     21300102: Char_1_51
@@ -60,9 +60,9 @@ TextureImporter:
     21300110: Char_1_55
     21300112: Char_1_56
     21300114: Char_1_57
-    21300116: Char_1_58
-    21300118: Char_1_59
-    21300120: Char_1_60
+    21300116: Char_1_Heavy0
+    21300118: Char_1_Heavy2
+    21300120: Char_1_Heavy3
     21300122: Char_1_LightPunch1
     21300124: Char_1_LightPunch2
     21300126: Char_1_LightPunch3
@@ -72,9 +72,9 @@ TextureImporter:
     21300134: Char_1_67
     21300136: Char_1_68
     21300138: Char_1_69
-    21300140: Char_1_70
-    21300142: Char_1_71
-    21300144: Char_1_72
+    21300140: Char_1_hurt4
+    21300142: Char_1_hurt3
+    21300144: Char_1_Heavy1
     21300146: Char_1_73
     21300148: Char_1_74
     21300150: Char_1_75
@@ -1112,7 +1112,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_46
+      name: Char_1_hurt1
       rect:
         serializedVersion: 2
         x: 213
@@ -1152,7 +1152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_48
+      name: Char_1_hurt2
       rect:
         serializedVersion: 2
         x: 337
@@ -1352,7 +1352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_58
+      name: Char_1_Heavy0
       rect:
         serializedVersion: 2
         x: 335
@@ -1372,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_59
+      name: Char_1_Heavy2
       rect:
         serializedVersion: 2
         x: 396
@@ -1392,11 +1392,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_60
+      name: Char_1_Heavy3
       rect:
         serializedVersion: 2
-        x: 463
-        y: 714
+        x: 466
+        y: 713
         width: 37
         height: 34
       alignment: 0
@@ -1592,10 +1592,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_70
+      name: Char_1_hurt4
       rect:
         serializedVersion: 2
-        x: 270
+        x: 271
         y: 656
         width: 32
         height: 30
@@ -1612,11 +1612,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_71
+      name: Char_1_hurt3
       rect:
         serializedVersion: 2
         x: 335
-        y: 656
+        y: 655
         width: 32
         height: 30
       alignment: 0
@@ -1632,11 +1632,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_72
+      name: Char_1_Heavy1
       rect:
         serializedVersion: 2
         x: 588
-        y: 649
+        y: 648
         width: 28
         height: 38
       alignment: 0

@@ -43,6 +43,7 @@ public class IdleState : IState
 				sM.ChangeState("lpunch");
 				break;
 			case "Right":
+                sM.ChangeState("hpunch");
 				break;
 			case "Space":
                 sM.ChangeState("block");
