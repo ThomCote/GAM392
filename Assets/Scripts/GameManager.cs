@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour {
 
 	public Text turnText;
 
+	public Text turnCountdownText;
+	bool nextMeasureSwitch = false;
+
 	public MusicPlayer musicPlayer;
 
 	int currentMeasure = 1;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	void Startup()
 	{
 		instance.currentMeasureText.text = "Current Measure: " + instance.currentMeasure;
+		instance.turnCountdownText.text = "";
 	}
 
 	public static PlayerController GetPlayerController()
@@ -62,10 +66,28 @@ public class GameManager : MonoBehaviour {
 
 		// Trigger any enemy behaviors
 		instance.currentEnemy.OnSubdivision(subCount);
+
+		if (instance.nextMeasureSwitch)
+		{
+			switch (subCount)
+			{
+				case 4:
+					instance.turnCountdownText.text = "3";
+					break;
+				case 8:
+					instance.turnCountdownText.text = "2";
+					break;
+				case 12:
+					instance.turnCountdownText.text = "1";
+					break;
+			}
+		}
 	}
 
 	public static void IncrementMeasure()
 	{
+		instance.nextMeasureSwitch = false;
+
 		++instance.currentMeasure;
 
 		instance.currentMeasureText.text = "Current Measure: " + instance.currentMeasure;
@@ -74,6 +96,11 @@ public class GameManager : MonoBehaviour {
 		if ((instance.currentMeasure - 1) % instance.combatPhaseLength == 0)
 		{
 			instance.ChangeCombatPhase();
+		}
+		else if (instance.currentMeasure % instance.combatPhaseLength == 0)
+		{
+			// If we're in the measure right before the switch
+			instance.nextMeasureSwitch = true;
 		}
 	}
 
@@ -88,10 +115,23 @@ public class GameManager : MonoBehaviour {
 		if (turnText.text == "Your turn!")
 		{
 			turnText.text = "Enemy's turn!";
+			StartCoroutine(ShowSwitchText("Defend!"));
 		}
 		else if (turnText.text == "Enemy's turn!")
 		{
 			turnText.text = "Your turn!";
+			StartCoroutine(ShowSwitchText("Fight!"));
 		}
+	}
+
+	IEnumerator ShowSwitchText(string txt)
+	{
+		turnCountdownText.text = txt;
+
+		yield return new WaitForSeconds(0.8f);
+
+		turnCountdownText.text = "";
+
+		yield return null;
 	}
 }
