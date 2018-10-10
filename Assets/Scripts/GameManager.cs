@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 
 	public Text currentMeasureText;
 
+	public Text turnText;
+
 	public MusicPlayer musicPlayer;
 
 	int currentMeasure = 1;
@@ -82,5 +84,14 @@ public class GameManager : MonoBehaviour {
 		currentEnemy.ToggleAttacking();
 
 		musicPlayer.SwapMusic();
+
+		if (turnText.text == "Your turn!")
+		{
+			turnText.text = "Enemy's turn!";
+		}
+		else if (turnText.text == "Enemy's turn!")
+		{
+			turnText.text = "Your turn!";
+		}
 	}
 }

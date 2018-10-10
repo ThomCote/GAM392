@@ -10,6 +10,7 @@ public class InputTester : MonoBehaviour {
 	public SoundPlayer soundPlayer;
 
 	public bool onlyPlayersTurn = true;
+	public bool onlyDefense = false;
 
 	PlayerController playerController;
 
@@ -28,7 +29,11 @@ public class InputTester : MonoBehaviour {
 	// Update is called once per frame
 	public void TriggeredUpdate ()
 	{
-		if (onlyPlayersTurn && !playerController.GetInputActive())
+		if (onlyDefense && !playerController.GetDefenseInputActive())
+		{
+			return;
+		}
+		if (onlyPlayersTurn && !playerController.GetAttackInputActive())
 		{
 			return;
 		}
@@ -40,7 +45,10 @@ public class InputTester : MonoBehaviour {
 			if (timePastSubdivision < goodMargin || timeToNext < goodMargin)
 			{
 				// Play the sound associated with this input.
-				soundPlayer.PlaySound();
+				if (soundPlayer)
+				{
+					soundPlayer.PlaySound();
+				}
 
 				if (timePastSubdivision < perfectMargin || timeToNext < perfectMargin)
 				{

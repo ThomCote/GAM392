@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour {
 
 	PlayerFSM fsm;
 
-	bool inputActive = true;
+	bool attackInputActive = true;
+	bool defenseInputActive = false;
 
 	public Text hpText;
 
@@ -28,7 +29,11 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput(string inputName)
 	{
-		if (inputActive)
+		if (defenseInputActive && inputName == "Space")
+		{
+			fsm.HandleInput(inputName);
+		}
+		else if (attackInputActive)
 		{
 			fsm.HandleInput(inputName);
 		}
@@ -53,12 +58,18 @@ public class PlayerController : MonoBehaviour {
 
 	public void ToggleInputActive()
 	{
-		inputActive = !inputActive;
+		attackInputActive = !attackInputActive;
+		defenseInputActive = !defenseInputActive;
 	}
 
-	public bool GetInputActive()
+	public bool GetAttackInputActive()
 	{
-		return inputActive;
+		return attackInputActive;
+	}
+
+	public bool GetDefenseInputActive()
+	{
+		return defenseInputActive;
 	}
 
 	void UpdateHPText()
