@@ -58,4 +58,9 @@ public abstract class EnemyController : MonoBehaviour {
 	{
 		attacking = !attacking;
 	}
+
+	public bool IsAttacking()
+	{
+		return attacking;
+	}
 }

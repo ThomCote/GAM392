@@ -15,12 +15,15 @@ public class GameManager : MonoBehaviour {
 
 	public Text currentMeasureText;
 
-	public Text turnText;
-
 	public Text turnCountdownText;
 	bool nextMeasureSwitch = false;
 
+	bool isPlayersTurn = true;
+
 	public MusicPlayer musicPlayer;
+
+	public SpriteRenderer leftSpotlight;
+	public SpriteRenderer rightSpotlight;
 
 	int currentMeasure = 1;
 
@@ -40,8 +43,11 @@ public class GameManager : MonoBehaviour {
 
 	void Startup()
 	{
-		instance.currentMeasureText.text = "Current Measure: " + instance.currentMeasure;
+		instance.currentMeasureText.text = "Measure: " + instance.currentMeasure;
 		instance.turnCountdownText.text = "";
+
+		leftSpotlight.color = Color.white;
+		rightSpotlight.color = Color.clear;
 	}
 
 	public static PlayerController GetPlayerController()
@@ -108,25 +114,42 @@ public class GameManager : MonoBehaviour {
 	{
 		playerController.ToggleInputActive();
 
+		isPlayersTurn = !isPlayersTurn;
+
 		currentEnemy.ToggleAttacking();
 
 		musicPlayer.SwapMusic();
 
-		if (turnText.text == "Your turn!")
+		if (isPlayersTurn)
 		{
-			turnText.text = "Enemy's turn!";
-			StartCoroutine(ShowSwitchText("Defend!"));
+			instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
 		}
-		else if (turnText.text == "Enemy's turn!")
+		else
 		{
-			turnText.text = "Your turn!";
-			StartCoroutine(ShowSwitchText("Fight!"));
+			instance.StartCoroutine(instance.DelayedSwapEvents("Block!"));
 		}
 	}
 
-	IEnumerator ShowSwitchText(string txt)
+	void SwapSpotlights()
 	{
-		turnCountdownText.text = txt;
+		if (leftSpotlight.color == Color.clear)
+		{
+			leftSpotlight.color = Color.white;
+			rightSpotlight.color = Color.clear;
+		}
+		else
+		{
+			leftSpotlight.color = Color.clear;
+			rightSpotlight.color = Color.white;
+		}
+	}
+
+	IEnumerator DelayedSwapEvents(string swapText)
+	{
+		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength());
+
+		turnCountdownText.text = swapText;
+		SwapSpotlights();
 
 		yield return new WaitForSeconds(0.8f);
 
