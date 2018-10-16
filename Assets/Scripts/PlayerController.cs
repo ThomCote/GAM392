@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour {
 	bool attackInputActive = true;
 	bool defenseInputActive = false;
 
+	bool isBlocking = false;
+
+	public SoundPlayer damageAudioSrc;
+
 	public Text hpText;
 
 	// Use this for initialization
@@ -32,6 +36,12 @@ public class PlayerController : MonoBehaviour {
 		if (defenseInputActive && inputName == "Space")
 		{
 			fsm.HandleInput(inputName);
+
+			// Only do a block if we're not already blocking - prevent stacking them.
+			if (!isBlocking)
+			{
+				StartCoroutine(DoBlock());
+			}
 		}
 		else if (attackInputActive)
 		{
@@ -41,9 +51,16 @@ public class PlayerController : MonoBehaviour {
 
 	public void TakeDamage(int dmg)
 	{
+		if (isBlocking)
+		{
+			return;
+		}
+
 		curHP -= dmg;
 
 		UpdateHPText();
+
+		damageAudioSrc.PlaySound();
 
 		if (curHP <= 0)
 		{
@@ -75,5 +92,16 @@ public class PlayerController : MonoBehaviour {
 	void UpdateHPText()
 	{
 		hpText.text = "Player HP: " + curHP;
+	}
+
+	IEnumerator DoBlock()
+	{
+		isBlocking = true;
+
+		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength());
+
+		isBlocking = false;
+
+		yield return null;
 	}
 }
