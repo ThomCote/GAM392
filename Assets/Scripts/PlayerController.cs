@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		isBlocking = true;
 
-		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength());
+		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() * 2.0f);
 
 		isBlocking = false;
 

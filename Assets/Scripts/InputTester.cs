@@ -62,15 +62,22 @@ public class InputTester : MonoBehaviour {
 				}
 
 				// Determine what subdivision we've hit and callback to RhythmManager
+				// Only do this for attacks, not blocks.
 				if (timePastSubdivision < timeToNext)
 				{
-					// If this is the case, we're closer to the current subdivision number
-					RhythmManager.OnInputSuccess(false);
+					if (!onlyDefense)
+					{
+						// If this is the case, we're closer to the current subdivision number
+						RhythmManager.OnInputSuccess(false);
+					}
 				}
 				else
 				{
-					// We're closer to the next subdivision number
-					RhythmManager.OnInputSuccess(true);
+					if (!onlyDefense)
+					{
+						// We're closer to the next subdivision number
+						RhythmManager.OnInputSuccess(true);
+					}
 				}
 
 				// Alert the player character FSM
