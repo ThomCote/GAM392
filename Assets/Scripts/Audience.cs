@@ -8,6 +8,10 @@ public class Audience : MonoBehaviour {
 	public Text satisLevelText;
 	public Text inputTrackingText;
 
+	public SoundPlayer cheerSoundPlayer;
+	public SoundPlayer booSoundPlayer;
+	public SoundPlayer boringSoundPlayer;
+
 	int[] satisLevelThresholds = new int[]
 	{
 		-30, // Angry, doing damage
@@ -281,11 +285,13 @@ public class Audience : MonoBehaviour {
 
 			// Tell the player to kick it up a notch
 			// TODO: Play 'Change it up!' or 'Boooooring!' voice clip
+			boringSoundPlayer.PlaySound();
 
 			if (level == 0)
 			{
 				// For when they're reeeally angry
 				// TODO
+				booSoundPlayer.PlaySound();
 			}
 		}
 		else
@@ -295,10 +301,13 @@ public class Audience : MonoBehaviour {
 				case 2: // Neutral
 					break;
 				case 3: // Excited
+					cheerSoundPlayer.PlaySound();
 					break;
 				case 4: // Wild
+					cheerSoundPlayer.PlaySound();
 					break;
 				case 5: // Fucking mental (give finisher)
+					cheerSoundPlayer.PlaySound();
 					break;
 			}
 		}
