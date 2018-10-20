@@ -82,6 +82,9 @@ public class InputTester : MonoBehaviour {
 
 				// Alert the player character FSM
 				playerController.HandleInput(inputButton);
+
+				// Alert the audience input tracking
+				Audience.RegisterAttackInput(inputButton);
 			}
 			else
 			{
