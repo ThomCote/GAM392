@@ -11,6 +11,7 @@ public class Audience : MonoBehaviour {
 	public SoundPlayer cheerSoundPlayer;
 	public SoundPlayer booSoundPlayer;
 	public SoundPlayer boringSoundPlayer;
+	public SoundPlayer applauseSoundPlayer;
 
 	int[] satisLevelThresholds = new int[]
 	{
@@ -301,7 +302,7 @@ public class Audience : MonoBehaviour {
 				case 2: // Neutral
 					break;
 				case 3: // Excited
-					cheerSoundPlayer.PlaySound();
+					applauseSoundPlayer.PlaySound();
 					break;
 				case 4: // Wild
 					cheerSoundPlayer.PlaySound();
