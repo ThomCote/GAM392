@@ -15,10 +15,25 @@ public class TestEnemy : EnemyController {
 			return;
 		}
 
-		// For testing, just attack every other quarter note.
-		if (sub == 5 || sub == 13)
+		// Telegraph before each attack.
+		if (sub == 0 || sub == 10)
 		{
-			DealDamage(punchDmg);
+			// Play warmup sound
+			attackSoundPlayer.PlaySound();
 		}
+
+		// For testing, just attack every other quarter note.
+		if (sub == 4 || sub == 12)
+		{
+			StartCoroutine(WaitThenDealDamage());
+		}
+	}
+
+	IEnumerator WaitThenDealDamage()
+	{
+		// Give a small margin AFTER the beat for the player to hit block a lil late.
+		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() / 2.0f);
+
+		DealDamage(punchDmg);
 	}
 }
