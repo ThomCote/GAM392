@@ -322,23 +322,6 @@ public class RhythmManager : MonoBehaviour {
 		return instance.totalSubdivisionCount;
 	}
 
-	public static float GetSubdivisionLength()
-	{
-		if (instance.acceptSixteenths)
-		{
-			return instance.sixteenthNoteLength;
-		}
-		else
-		{
-			return instance.eighthNoteLength;
-		}
-	}
-
-	public static float GetQuarterNoteLength()
-	{
-		return instance.quarterNoteLength;
-	}
-
 	public static void SetTempo(float bpm)
 	{
 		if (bpm <= 0.0f)

@@ -10,8 +10,6 @@ public abstract class EnemyController : MonoBehaviour {
 
 	public Text healthText;
 
-	public SoundPlayer attackSoundPlayer;
-
 	protected bool attacking;
 
 	// Use this for initialization
@@ -59,10 +57,5 @@ public abstract class EnemyController : MonoBehaviour {
 	public void ToggleAttacking()
 	{
 		attacking = !attacking;
-	}
-
-	public bool IsAttacking()
-	{
-		return attacking;
 	}
 }

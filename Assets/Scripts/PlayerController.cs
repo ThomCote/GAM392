@@ -10,12 +10,7 @@ public class PlayerController : MonoBehaviour {
 
 	PlayerFSM fsm;
 
-	bool attackInputActive = true;
-	bool defenseInputActive = false;
-
-	bool isBlocking = false;
-
-	public SoundPlayer damageAudioSrc;
+	bool inputActive = true;
 
 	public Text hpText;
 
@@ -33,17 +28,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput(string inputName)
 	{
-		if (defenseInputActive && inputName == "Space")
-		{
-			fsm.HandleInput(inputName);
-
-			// Only do a block if we're not already blocking - prevent stacking them.
-			if (!isBlocking)
-			{
-				StartCoroutine(DoBlock());
-			}
-		}
-		else if (attackInputActive)
+		if (inputActive)
 		{
 			fsm.HandleInput(inputName);
 		}
@@ -51,16 +36,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void TakeDamage(int dmg)
 	{
-		if (isBlocking)
-		{
-			return;
-		}
-
 		curHP -= dmg;
 
 		UpdateHPText();
-
-		damageAudioSrc.PlaySound();
 
 		if (curHP <= 0)
 		{
@@ -75,33 +53,16 @@ public class PlayerController : MonoBehaviour {
 
 	public void ToggleInputActive()
 	{
-		attackInputActive = !attackInputActive;
-		defenseInputActive = !defenseInputActive;
+		inputActive = !inputActive;
 	}
 
-	public bool GetAttackInputActive()
+	public bool GetInputActive()
 	{
-		return attackInputActive;
-	}
-
-	public bool GetDefenseInputActive()
-	{
-		return defenseInputActive;
+		return inputActive;
 	}
 
 	void UpdateHPText()
 	{
 		hpText.text = "Player HP: " + curHP;
-	}
-
-	IEnumerator DoBlock()
-	{
-		isBlocking = true;
-
-		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() * 2.5f);
-
-		isBlocking = false;
-
-		yield return null;
 	}
 }
