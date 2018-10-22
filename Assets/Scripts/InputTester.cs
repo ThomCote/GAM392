@@ -10,7 +10,6 @@ public class InputTester : MonoBehaviour {
 	public SoundPlayer soundPlayer;
 
 	public bool onlyPlayersTurn = true;
-	public bool onlyDefense = false;
 
 	PlayerController playerController;
 
@@ -29,11 +28,7 @@ public class InputTester : MonoBehaviour {
 	// Update is called once per frame
 	public void TriggeredUpdate ()
 	{
-		if (onlyDefense && !playerController.GetDefenseInputActive())
-		{
-			return;
-		}
-		if (onlyPlayersTurn && !playerController.GetAttackInputActive())
+		if (onlyPlayersTurn && !playerController.GetInputActive())
 		{
 			return;
 		}
@@ -45,10 +40,7 @@ public class InputTester : MonoBehaviour {
 			if (timePastSubdivision < goodMargin || timeToNext < goodMargin)
 			{
 				// Play the sound associated with this input.
-				if (soundPlayer)
-				{
-					soundPlayer.PlaySound();
-				}
+				soundPlayer.PlaySound();
 
 				if (timePastSubdivision < perfectMargin || timeToNext < perfectMargin)
 				{
@@ -62,29 +54,19 @@ public class InputTester : MonoBehaviour {
 				}
 
 				// Determine what subdivision we've hit and callback to RhythmManager
-				// Only do this for attacks, not blocks.
 				if (timePastSubdivision < timeToNext)
 				{
-					if (!onlyDefense)
-					{
-						// If this is the case, we're closer to the current subdivision number
-						RhythmManager.OnInputSuccess(false);
-					}
+					// If this is the case, we're closer to the current subdivision number
+					RhythmManager.OnInputSuccess(false);
 				}
 				else
 				{
-					if (!onlyDefense)
-					{
-						// We're closer to the next subdivision number
-						RhythmManager.OnInputSuccess(true);
-					}
+					// We're closer to the next subdivision number
+					RhythmManager.OnInputSuccess(true);
 				}
 
 				// Alert the player character FSM
 				playerController.HandleInput(inputButton);
-
-				// Alert the audience input tracking
-				Audience.RegisterAttackInput(inputButton);
 			}
 			else
 			{

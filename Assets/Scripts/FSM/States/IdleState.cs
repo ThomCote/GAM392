@@ -17,14 +17,14 @@ public class IdleState : IState
 
     public void Enter()
     {
-        // Debug.Log("Entering Idle State");
+        Debug.Log("Entering Idle State");
 
         ani = character.GetComponent<Animator>();
     }
 
     public void Execute()
     {
-        // Debug.Log("Execute Idle State");
+        Debug.Log("Execute Idle State");
 
         ani.SetBool("isWalking", false);
     }
