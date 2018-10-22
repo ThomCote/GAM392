@@ -178,6 +178,12 @@ public class ComboManager : MonoBehaviour {
 		// TODO - This'll involve applying the damage you've built up for your attack
 		GameManager.DamageEnemy(currentComboDamage);
 
+		// Alert audience that you've finished the combo successfully
+		if (comboNoteLengths.Count > 1)
+		{
+			Audience.OnSuccessfulCombo(currentComboDamage);
+		}
+
 		// Reset text
 		comboText.text = "Current Combo:";
 
