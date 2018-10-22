@@ -10,6 +10,8 @@ public abstract class EnemyController : MonoBehaviour {
 
 	public Text healthText;
 
+	public SoundPlayer attackSoundPlayer;
+
 	protected bool attacking;
 
 	// Use this for initialization
