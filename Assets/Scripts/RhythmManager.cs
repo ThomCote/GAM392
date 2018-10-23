@@ -142,14 +142,23 @@ public class RhythmManager : MonoBehaviour {
 				{
 					eighthNoteCount = (currentSubdivisionCount / 2) + 1;
 					eighthNoteCounter.text = eighthNoteCount.ToString();
-				}
+
+                    //StageLight Indicator
+                    StageLightManager.FarRightColorChange();
+                    StageLightManager.FarLeftColorChange();
+
+                }
 				
 				if (currentSubdivisionCount % 4 == 0)
 				{
 					quarterNoteCount = (currentSubdivisionCount / 4) + 1;
 					quarterNoteCounter.text = quarterNoteCount.ToString();
 
-				}
+                    //StageLight Indicator
+                    StageLightManager.MiddleRightColorChange();
+                    StageLightManager.MiddleLeftColorChange();
+
+                }
 
 				OnSubdivision();
 			}
