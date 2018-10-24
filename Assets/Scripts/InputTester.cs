@@ -64,12 +64,12 @@ public class InputTester : MonoBehaviour {
 				if (timePastSubdivision < perfectMargin || timeToNext < perfectMargin)
 				{
 					// Perfect
-					StartCoroutine(FlashColor(Color.green));
+					// StartCoroutine(FlashColor(Color.green));
 				}
 				else
 				{
 					// Good
-					StartCoroutine(FlashColor(Color.yellow));
+					// StartCoroutine(FlashColor(Color.yellow));
 				}
 
 				// Determine what subdivision we've hit and callback to RhythmManager
@@ -106,7 +106,7 @@ public class InputTester : MonoBehaviour {
 			else
 			{
 				// Failed
-				StartCoroutine(FlashColor(Color.red));
+				// StartCoroutine(FlashColor(Color.red));
 
 				ComboManager.FailCombo();
 			}

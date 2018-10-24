@@ -78,6 +78,17 @@ public class Audience : MonoBehaviour {
 		UpdateText();
 	}
 
+	public static void ResetInputTracking()
+	{
+		instance.overdoneInputs.Clear();
+
+		instance.inputFrequencies.Clear();
+		instance.inputFrequencies.Add("Left", 3);
+		instance.inputFrequencies.Add("Right", 3);
+		instance.inputFrequencies.Add("Up", 3);
+		instance.inputFrequencies.Add("Down", 3);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		

@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 		instance.currentMeasureText.text = "Measure: " + instance.currentMeasure;
 		instance.turnCountdownText.text = "";
 
-		leftSpotlight.color = Color.white;
+		leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 		rightSpotlight.color = Color.clear;
 	}
 
@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour {
 
 		if (isPlayersTurn)
 		{
+			Audience.ResetInputTracking();
 			instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
 		}
 		else
@@ -156,13 +157,13 @@ public class GameManager : MonoBehaviour {
 	{
 		if (leftSpotlight.color == Color.clear)
 		{
-			leftSpotlight.color = Color.white;
+			leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 			rightSpotlight.color = Color.clear;
 		}
 		else
 		{
 			leftSpotlight.color = Color.clear;
-			rightSpotlight.color = Color.white;
+			rightSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 		}
 	}
 
