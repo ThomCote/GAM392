@@ -41,6 +41,15 @@ public class InputTester : MonoBehaviour {
 		}
 		if (Input.GetButtonDown(inputButton))
 		{
+			// If this input is currently 'overused' don't accept it and give some feedback
+			if (Audience.IsInputOverdone(inputButton))
+			{
+				// Play a whiff sound I Guess
+				GameManager.PlayWhiffSound();
+
+				return;
+			}
+
 			float timePastSubdivision = RhythmManager.GetTimePastCurrentSubdivision();
 			float timeToNext = RhythmManager.GetTimeToNextSubdivision();
 
