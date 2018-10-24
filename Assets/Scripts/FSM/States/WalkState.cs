@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WalkState : IState
-{ 
+{
+    PlayerFSM character;
+    StateMachine sM;
+    IState nextState;
+    Animator ani;
 
-    public WalkState(BaseFSM chrctr)
+    public WalkState(PlayerFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
     }
 
-    public override void Enter()
+    public void Enter()
     {
         Debug.Log("Entering WalkState");
         ani = character.GetComponent<Animator>();
     }
 
-    public override void Execute()
+    public void Execute()
     {
         Debug.Log("Execute WalkState");
         
         ani.SetBool("isWalking", true);
     }
 
-    public override void HandleInput(string inputStr)
+    public void HandleInput(string inputStr)
     {
         if (Input.GetKeyUp(KeyCode.D))
         {
@@ -33,12 +37,7 @@ public class WalkState : IState
 
     }
 
-    public override void HandleInput(int moveIndex)
-    {
-
-    }
-
-    public override void Exit()
+    public void Exit()
     {
         Debug.Log("Exiting WalkState");
     }

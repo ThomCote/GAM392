@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class UpperCutState : IState
 {
-    public UpperCutState(BaseFSM chrctr)
+    PlayerFSM character;
+    StateMachine sM;
+    IState nextState;
+    Animator ani;
+
+    public UpperCutState(PlayerFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
     }
 
-    public override void Enter()
+    public void Enter()
     {
         Debug.Log("Entering UpperCutState");
 
         ani = character.GetComponent<Animator>();
     }
 
-    public override void Execute()
+    public void Execute()
     {
         Debug.Log("Execute UpperCutState");
 
@@ -25,18 +30,13 @@ public class UpperCutState : IState
         sM.ChangeState("idle");
     }
 
-    public override void HandleInput(string inputStr)
+    public void HandleInput(string inputStr)
     {
         //Going to have to check for combo inputs eventually
 
     }
 
-    public override void HandleInput(int moveIndex)
-    {
-
-    }
-
-    public override void Exit()
+    public void Exit()
     {
         Debug.Log("Exiting UpperCutState");
     }

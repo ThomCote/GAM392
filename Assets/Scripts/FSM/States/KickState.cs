@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class KickState : IState
 {
-    public KickState(BaseFSM chrctr)
+    PlayerFSM character;
+    StateMachine sM;
+    IState nextState;
+    Animator ani;
+
+    public KickState(PlayerFSM chrctr)
     {
         character = chrctr;
         sM = character.stateMachine;
     }
 
-    public override void Enter()
+    public void Enter()
     {
         Debug.Log("Entering KickState");
 
         ani = character.GetComponent<Animator>();
     }
 
-    public override void Execute()
+    public void Execute()
     {
         Debug.Log("Execute KickState");
 
@@ -26,17 +31,12 @@ public class KickState : IState
         sM.ChangeState("idle");
     }
 
-    public override void HandleInput(string inputStr)
+    public void HandleInput(string inputStr)
     {
 
     }
 
-    public override void HandleInput(int moveIndex)
-    {
-
-    }
-
-    public override void Exit()
+    public void Exit()
     {
         Debug.Log("Exiting KickState");
     }

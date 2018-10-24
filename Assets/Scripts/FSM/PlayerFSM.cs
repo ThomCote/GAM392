@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFSM : BaseFSM {
+public class PlayerFSM : MonoBehaviour {
+
+   public StateMachine stateMachine = new StateMachine();
 
     void Start()
     {
-        stateMachine = new StateMachine();
         initializeStates();
         stateMachine.ChangeState("idle");
     }
 
-    public override void initializeStates()
+    void initializeStates()
     {
         stateMachine.AddState("idle", new IdleState(this));
-        stateMachine.AddState("hurt", new HurtState(this));
         stateMachine.AddState("walk", new WalkState(this));
         stateMachine.AddState("kick", new KickState(this));
         stateMachine.AddState("upper", new UpperCutState(this));
@@ -28,13 +28,10 @@ public class PlayerFSM : BaseFSM {
         stateMachine.Update();
     }
 
-    public override void HandleInput(string inputName)
+    public void HandleInput(string inputName)
     {
         stateMachine.HandleInput(inputName);
     }
-
-    public override void GetHurt()
-    {
-        base.GetHurt();
-    }
 }
+
+

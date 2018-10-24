@@ -8,16 +8,14 @@ public abstract class EnemyController : MonoBehaviour {
 	public int maxHP;
 	int curHP;
 
-    public EnemyFSM enemyFsm;
-
-    public Text healthText;
+	public Text healthText;
 
 	public SoundPlayer attackSoundPlayer;
 
 	protected bool attacking;
 
 	// Use this for initialization
-	protected virtual void Start () {
+	void Start () {
 		curHP = maxHP;
 		UpdateHPText();
 	}
@@ -26,11 +24,6 @@ public abstract class EnemyController : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public void HandleInput(int moveIndex)
-    {
-        enemyFsm.HandleInput(moveIndex);
-    }
 
 	// Behavior per-subdivision, driven by rhythm system.
 	// Assuming 16th note subdivisions.
@@ -48,11 +41,6 @@ public abstract class EnemyController : MonoBehaviour {
 		}
 	}
 
-    public void GetHurt()
-    {
-        enemyFsm.GetHurt();
-    }
-
 	protected void DealDamage(int dmg)
 	{
 		GameManager.DamagePlayer(dmg);
@@ -63,7 +51,7 @@ public abstract class EnemyController : MonoBehaviour {
 
 	}
 
-    void UpdateHPText()
+	void UpdateHPText()
 	{
 		healthText.text = "Enemy HP: " + curHP;
 	}

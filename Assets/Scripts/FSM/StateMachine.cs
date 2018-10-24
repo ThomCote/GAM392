@@ -36,15 +36,5 @@ public class StateMachine
     {
        if (currentState != null) currentState.HandleInput(inputName);
     }
-
-    public void HandleInput(int moveIndex)
-    {
-        if (currentState != null) currentState.HandleInput(moveIndex);
-    }
-
-    public void GetHurt()
-    {
-        if (currentState != null) currentState.GetHurt();
-    }
 }
 

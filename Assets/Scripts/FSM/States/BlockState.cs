@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class BlockState : IState
 {
+    PlayerFSM character;
+    StateMachine sM;
+    IState nextState;
+    Animator ani;
 
-    public BlockState(BaseFSM chrctr)
+    public BlockState(PlayerFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
     }
 
-    public override void Enter()
+    public void Enter()
     {
         Debug.Log("Entering BlockState");
         ani = character.GetComponent<Animator>();
     }
 
-    public override void Execute()
+    public void Execute()
     {
         Debug.Log("Execute BlockState");
 
@@ -25,17 +29,12 @@ public class BlockState : IState
         sM.ChangeState("idle");
     }
 
-    public override void HandleInput(string inputStr)
+    public void HandleInput(string inputStr)
     {
 
     }
 
-    public override void HandleInput(int moveIndex)
-    {
-
-    }
-
-    public override void Exit()
+    public void Exit()
     {
         Debug.Log("Exiting BlockState");
     }
