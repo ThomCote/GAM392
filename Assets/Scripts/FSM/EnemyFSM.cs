@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFSM : BaseFSM {
+public class EnemyFSM : BaseFSM {
 
-    void Start()
+    // Use this for initialization
+    void Start ()
     {
         stateMachine = new StateMachine();
         initializeStates();
@@ -15,22 +16,21 @@ public class PlayerFSM : BaseFSM {
     {
         stateMachine.AddState("idle", new IdleState(this));
         stateMachine.AddState("hurt", new HurtState(this));
-        stateMachine.AddState("walk", new WalkState(this));
         stateMachine.AddState("kick", new KickState(this));
         stateMachine.AddState("upper", new UpperCutState(this));
         stateMachine.AddState("lpunch", new LightPunchState(this));
         stateMachine.AddState("hpunch", new HeavyAttackState(this));
-        stateMachine.AddState("block", new BlockState(this));
     }
 
-    void Update()
+    // Update is called once per frame
+    void Update ()
     {
         stateMachine.Update();
-    }
+	}
 
-    public override void HandleInput(string inputName)
+    public override void HandleInput(int moveIndex)
     {
-        stateMachine.HandleInput(inputName);
+        stateMachine.HandleInput(moveIndex);
     }
 
     public override void GetHurt()

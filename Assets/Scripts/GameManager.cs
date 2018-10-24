@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour {
 		return instance.playerController;
 	}
 
+    public static EnemyController GetCurrentEnemyController()
+    {
+        return instance.currentEnemy;
+    }
+
 	public static void DamagePlayer(int dmg)
 	{
 		instance.playerController.TakeDamage(dmg);
@@ -64,6 +69,16 @@ public class GameManager : MonoBehaviour {
 	{
 		instance.currentEnemy.TakeDamage(dmg);
 	}
+
+    public static void PlayerHurt()
+    {
+        instance.currentEnemy.GetHurt();
+    }
+
+    public static void EnemyHurt()
+    {
+        instance.playerController.GetHurt();
+    }
 
 	// Called every subdivision of a measure
 	public static void OnSubdivision(int subCount)
@@ -143,6 +158,11 @@ public class GameManager : MonoBehaviour {
 			rightSpotlight.color = Color.white;
 		}
 	}
+
+    public static bool GetIsPlayersTurn()
+    {
+        return instance.isPlayersTurn;
+    }
 
 	IEnumerator DelayedSwapEvents(string swapText)
 	{

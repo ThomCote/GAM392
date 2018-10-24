@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class HeavyAttackState : IState
 {
-    PlayerFSM character;
-    StateMachine sM;
-    IState nextState;
-    Animator ani;
-
-    public HeavyAttackState(PlayerFSM chrctr)
+    public HeavyAttackState(BaseFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
     }
-    public void Enter()
+    public override void Enter()
     {
         Debug.Log("Entering HeavyAttackState");
 
         ani = character.GetComponent<Animator>();
     }
 
-    public void Execute()
+    public override void Execute()
     {
         Debug.Log("Execute HeavyAttackState");
 
@@ -29,13 +24,18 @@ public class HeavyAttackState : IState
         sM.ChangeState("idle");
     }
 
-    public void HandleInput(string inputStr)
+    public override void HandleInput(string inputStr)
     {
         //Going to have to check for combo inputs eventually
 
     }
 
-    public void Exit()
+    public override void HandleInput(int moveIndex)
+    {
+
+    }
+
+    public override void Exit()
     {
         Debug.Log("Exiting HeavyAttackState");
     }

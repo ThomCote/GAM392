@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpperCutState : IState
+public class HurtState : IState
 {
-    public UpperCutState(BaseFSM chrctr)
+    public HurtState(BaseFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
@@ -12,22 +12,20 @@ public class UpperCutState : IState
 
     public override void Enter()
     {
-        Debug.Log("Entering UpperCutState");
-
+        Debug.Log("Entering HurtState");
         ani = character.GetComponent<Animator>();
     }
 
     public override void Execute()
     {
-        Debug.Log("Execute UpperCutState");
+        Debug.Log("Execute HurtState");
 
-        ani.SetTrigger("upper");
+        ani.SetTrigger("hit");
         sM.ChangeState("idle");
     }
 
     public override void HandleInput(string inputStr)
     {
-        //Going to have to check for combo inputs eventually
 
     }
 
@@ -38,6 +36,7 @@ public class UpperCutState : IState
 
     public override void Exit()
     {
-        Debug.Log("Exiting UpperCutState");
+        Debug.Log("Exiting HurtState");
     }
+
 }

@@ -4,38 +4,43 @@ using UnityEngine;
 
 public class LightPunchState : IState
 {
-    PlayerFSM character;
-    StateMachine sM;
-    IState nextState;
-    Animator ani;
-
-    public LightPunchState(PlayerFSM chrctr)
+    public LightPunchState(BaseFSM chrctr)
     {
         character = chrctr;
         sM = chrctr.stateMachine;
     }
-    public void Enter()
+    public override void Enter()
     {
         Debug.Log("Entering LightPunchState");
 
         ani = character.GetComponent<Animator>();
     }
 
-    public void Execute()
+    public override void Execute()
     {
         Debug.Log("Execute LightPunchState");
 
         ani.SetTrigger("lightpunch");
-        sM.ChangeState("idle");
+
+        if(ani.GetBool("isTransitioning") == false)
+        {
+            sM.ChangeState("idle");
+        }
+       
     }
 
-    public void HandleInput(string inputStr)
+    public override void HandleInput(string inputStr)
     {
         //Going to have to check for combo inputs eventually
 
     }
 
-    public void Exit()
+    public override void HandleInput(int moveIndex)
+    {
+
+    }
+
+    public override void Exit()
     {
         Debug.Log("Exiting LightPunchState");
     }
