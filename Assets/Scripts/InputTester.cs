@@ -13,6 +13,7 @@ public class InputTester : MonoBehaviour {
 	public bool onlyDefense = false;
 
 	PlayerController playerController;
+    EnemyController currEnemy;
 
 	Image img;
 
@@ -24,6 +25,7 @@ public class InputTester : MonoBehaviour {
 		img = GetComponent<Image>();
 		RhythmManager.GetInputMargins(out goodMargin, out perfectMargin);
 		playerController = GameManager.GetPlayerController();
+        currEnemy = GameManager.GetCurrentEnemyController();
 	}
 	
 	// Update is called once per frame
@@ -91,6 +93,12 @@ public class InputTester : MonoBehaviour {
 
 				// Alert the player character FSM
 				playerController.HandleInput(inputButton);
+
+                //Alert current enemy fsm its been hurt if its players turn
+                if (GameManager.GetIsPlayersTurn() == true)
+                {
+                    currEnemy.GetHurt();
+                }
 
 				// Alert the audience input tracking
 				Audience.RegisterAttackInput(inputButton);

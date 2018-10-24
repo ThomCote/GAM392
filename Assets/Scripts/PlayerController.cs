@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
+    public void GetHurt()
+    {
+        fsm.GetHurt();
+    }
+
 	public void HandleInput(string inputName)
 	{
 		if (defenseInputActive && inputName == "Space")
@@ -55,6 +60,9 @@ public class PlayerController : MonoBehaviour {
 		{
 			return;
 		}
+        
+        //Alert fsm that player has been hurt
+        fsm.GetHurt();
 
 		curHP -= dmg;
 
