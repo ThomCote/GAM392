@@ -13,8 +13,6 @@ public class Audience : MonoBehaviour {
 	public SoundPlayer boringSoundPlayer;
 	public SoundPlayer applauseSoundPlayer;
 
-	List<string> overdoneInputs = new List<string>();
-
 	int[] satisLevelThresholds = new int[]
 	{
 		-30, // Angry, doing damage
@@ -87,16 +85,7 @@ public class Audience : MonoBehaviour {
 	{
 		satisLevelText.text = "SatisLevel: " + curSatisLevel + "\nSatisValue: " + curSatisValue;
 		inputTrackingText.text = inputFrequencies["Left"] + "     " + inputFrequencies["Down"] + "     "
-			+ inputFrequencies["Up"] + "     " + inputFrequencies["Right"] + "\nOverdone: ";
-		foreach (string s in overdoneInputs)
-		{
-			inputTrackingText.text += s + ", ";
-		}
-	}
-
-	public static bool IsInputOverdone(string inputName)
-	{
-		return instance.overdoneInputs.Contains(inputName);
+			+ inputFrequencies["Up"] + "     " + inputFrequencies["Right"];
 	}
 
 	// Damage from a successful (non-boring) combo adds to the satisfaction value
@@ -175,17 +164,6 @@ public class Audience : MonoBehaviour {
 			inputFrequencies["Right"]
 		};
 
-		string[] inputNames = new string[4]
-		{
-			"Up",
-			"Down",
-			"Left",
-			"Right"
-		};
-
-		// Clear overdone input tracking and recalculate it
-		overdoneInputs.Clear();
-
 		// Get bored if any input is used too many times more than any other.
 		int maxMargin = 0;
 		int minMarginThatOffends = 99999;
@@ -200,30 +178,9 @@ public class Audience : MonoBehaviour {
 				{
 					maxMargin = margin;
 				}
-				if (margin > maxGoodInputFreq)
+				if (margin > maxGoodInputFreq && margin < minMarginThatOffends)
 				{
-					// Record that this input is overdone
-					if (freqs[i] > freqs[j])
-					{
-						// Freqs[i] is the greater one
-						if (!overdoneInputs.Contains(inputNames[i]))
-						{
-							overdoneInputs.Add(inputNames[i]);
-						}
-					}
-					else
-					{
-						// Freqs[j] is the greater one
-						if (!overdoneInputs.Contains(inputNames[j]))
-						{
-							overdoneInputs.Add(inputNames[j]);
-						}
-					}
-
-					if (margin < minMarginThatOffends)
-					{
-						minMarginThatOffends = margin;
-					}
+					minMarginThatOffends = margin;
 				}
 			}
 		}

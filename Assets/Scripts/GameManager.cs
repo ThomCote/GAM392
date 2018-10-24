@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour {
 
 	public EnemyController currentEnemy;
 
-	public SoundPlayer whiffSoundPlayer;
-
 	public int combatPhaseLength = 8;
 
 	public Text currentMeasureText;
@@ -65,11 +63,6 @@ public class GameManager : MonoBehaviour {
 	public static void DamageEnemy(int dmg)
 	{
 		instance.currentEnemy.TakeDamage(dmg);
-	}
-
-	public static void PlayWhiffSound()
-	{
-		instance.whiffSoundPlayer.PlaySound();
 	}
 
 	// Called every subdivision of a measure
