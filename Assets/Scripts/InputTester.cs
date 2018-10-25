@@ -41,6 +41,15 @@ public class InputTester : MonoBehaviour {
 		}
 		if (Input.GetButtonDown(inputButton))
 		{
+			// If this input is currently 'overused' don't accept it and give some feedback
+			if (Audience.IsInputOverdone(inputButton))
+			{
+				// Play a whiff sound I Guess
+				GameManager.PlayWhiffSound();
+
+				return;
+			}
+
 			float timePastSubdivision = RhythmManager.GetTimePastCurrentSubdivision();
 			float timeToNext = RhythmManager.GetTimeToNextSubdivision();
 
@@ -55,12 +64,12 @@ public class InputTester : MonoBehaviour {
 				if (timePastSubdivision < perfectMargin || timeToNext < perfectMargin)
 				{
 					// Perfect
-					StartCoroutine(FlashColor(Color.green));
+					// StartCoroutine(FlashColor(Color.green));
 				}
 				else
 				{
 					// Good
-					StartCoroutine(FlashColor(Color.yellow));
+					// StartCoroutine(FlashColor(Color.yellow));
 				}
 
 				// Determine what subdivision we've hit and callback to RhythmManager
@@ -97,7 +106,7 @@ public class InputTester : MonoBehaviour {
 			else
 			{
 				// Failed
-				StartCoroutine(FlashColor(Color.red));
+				// StartCoroutine(FlashColor(Color.red));
 
 				ComboManager.FailCombo();
 			}

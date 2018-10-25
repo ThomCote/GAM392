@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour {
 		instance.currentEnemy.TakeDamage(dmg);
 	}
 
+	public static void PlayWhiffSound()
+	{
+		instance.whiffSoundPlayer.PlaySound();
+	}
+
     public static void PlayerHurt()
     {
         instance.currentEnemy.GetHurt();
@@ -154,6 +159,10 @@ public class GameManager : MonoBehaviour {
 		if (isPlayersTurn)
 		{
 			instance.StartCoroutine(instance.DelayedSwapEvents("Go!"));
+=======
+			Audience.ResetInputTracking();
+			instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
+>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		}
 		else
 		{
@@ -165,13 +174,21 @@ public class GameManager : MonoBehaviour {
 	{
 		if (leftSpotlight.color == Color.clear)
 		{
+<<<<<<< HEAD
 			leftSpotlight.color = DefaultSpotLightColor;
+=======
+			leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 			rightSpotlight.color = Color.clear;
 		}
 		else
 		{
 			leftSpotlight.color = Color.clear;
+<<<<<<< HEAD
 			rightSpotlight.color = DefaultSpotLightColor;
+=======
+			rightSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		}
 	}
 
