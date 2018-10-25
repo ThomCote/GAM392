@@ -203,7 +203,7 @@ public class ComboManager : MonoBehaviour {
 
 	void FailCombo_Private()
 	{
-		failSoundPlayer.Play();
+		//failSoundPlayer.Play();
 
 		comboOngoing = false;
 

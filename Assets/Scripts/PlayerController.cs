@@ -17,13 +17,16 @@ public class PlayerController : MonoBehaviour {
 
 	public SoundPlayer damageAudioSrc;
 
+    public Slider healthBar;
+
 	public Text hpText;
 
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
 		curHP = maxHP;
-		UpdateHPText();
+        InitializeHealthBar();
+		//UpdateHPText();
 	}
 	
 	// Update is called once per frame
@@ -99,8 +102,19 @@ public class PlayerController : MonoBehaviour {
 
 	void UpdateHPText()
 	{
-		hpText.text = "Player HP: " + curHP;
+		//hpText.text = "Player HP: " + curHP;
+        if (curHP <= 0)
+            healthBar.value = 0;
+        else
+            healthBar.value = curHP;
 	}
+
+    void InitializeHealthBar()
+    {
+        healthBar.minValue = 0;
+        healthBar.maxValue = maxHP;
+        healthBar.value = curHP;
+    }
 
 	IEnumerator DoBlock()
 	{

@@ -7,17 +7,22 @@ public class StageLightManager : MonoBehaviour {
 
     static StageLightManager instance;
 
+    [SerializeField] float flashTime = 0.1f;
+
+
+    private int numLights = 4;
+    private int LightIndex = 0;
+    [SerializeField] SpriteRenderer[] StageLightsArray;
     [SerializeField] SpriteRenderer FarRightLight;
     [SerializeField] SpriteRenderer MiddleRightLight;
     [SerializeField] SpriteRenderer MiddleLeftLight;
     [SerializeField] SpriteRenderer FarLeftLight;
 
-    [SerializeField] Color FarRightColor;
-    [SerializeField] Color MiddleRightColor;
-    [SerializeField] Color MiddleLeftColor;
-    [SerializeField] Color FarLeftColor;
+    private Color currColor;
+    private int totalNumColors;
+    private int colorIndex;
+    [SerializeField] Color[] LightColorsArray;
 
-    [SerializeField] float flashTime = 0.1f;
 
     // Use this for initialization
     void Awake()
@@ -36,57 +41,96 @@ public class StageLightManager : MonoBehaviour {
 
     void Initialize()
     {
-        FarRightLight.color = Color.clear;
-        MiddleRightLight.color = Color.clear;
-        MiddleLeftLight.color = Color.clear;
-        FarLeftLight.color = Color.clear;
+        //Populate Light array in order
+        PopulateLightArray();
 
-        //SetColorAlphas to Opaque
-        FarRightColor.a = 1;
-        MiddleRightColor.a = 1;
-        MiddleLeftColor.a = 1;
-        FarLeftColor.a = 1;
+        //Make Light Colors Clear at start
+        InitializeLightsAsClear();
+
+        //Set Color Alphas to Opaque
+        SetColorArrayAlphas(1);
+
+        //Set totalNumberOfColors
+        totalNumColors = LightColorsArray.Length;
+
+        //Set currentColor to first Color in array
+        colorIndex = 0;
+        currColor = LightColorsArray[colorIndex];
     }
 
-    public static void FarRightColorChange()
+    void SetColorArrayAlphas(int alphaNum)
     {
-        instance.FarRightColorChange_Private();
+        for(int i = 0; i < LightColorsArray.Length; i++)
+        {
+            LightColorsArray[i].a = alphaNum;
+        }
     }
 
-    void FarRightColorChange_Private()
+    void InitializeLightsAsClear()
     {
-       StartCoroutine(FlashSprite(FarRightLight, FarRightColor, flashTime));
+        for (int i = 0; i < numLights; i++)
+        {
+            StageLightsArray[i].color = Color.clear;
+        }
     }
 
-    public static void MiddleRightColorChange()
+    public static void CycleStageLights()
     {
-        instance.MiddleRightColorChange_Private();
+        instance.CycleStageLights_Private();
     }
 
-    void MiddleRightColorChange_Private()
+    void CycleStageLights_Private()
     {
-        StartCoroutine(FlashSprite(MiddleRightLight, MiddleRightColor, flashTime));
+        if(LightIndex <= 3)
+        {
+            StartCoroutine(FlashSprite(StageLightsArray[LightIndex], currColor, flashTime));
+            LightIndex++;
+        }
+        else
+        {
+            for (int i = 0; i < numLights; i++)
+            {
+                StartCoroutine(FlashSprite(StageLightsArray[i], currColor, flashTime));
+            }
+            //StartCoroutine(FlashSprite(StageLightsArray[0], currColor, flashTime));
+            //StartCoroutine(FlashSprite(StageLightsArray[1], currColor, flashTime));
+            //StartCoroutine(FlashSprite(StageLightsArray[2], currColor, flashTime));
+            //StartCoroutine(FlashSprite(StageLightsArray[3], currColor, flashTime));
+
+            LightIndex = 0;
+            ChooseNextColor();
+        }
+       
     }
 
-    public static void MiddleLeftColorChange()
+    void ChooseNextColor()
     {
-        instance.MiddleLeftColorChange_Private();
+        if (colorIndex < LightColorsArray.Length - 1)
+        {
+            colorIndex++;
+            SetCurrentColor(LightColorsArray[colorIndex]);
+        }
+        else
+        {
+            colorIndex = 0;
+            SetCurrentColor(LightColorsArray[colorIndex]);
+        }
     }
 
-    void MiddleLeftColorChange_Private()
+    void PopulateLightArray()
     {
-        StartCoroutine(FlashSprite(MiddleLeftLight, MiddleLeftColor, flashTime));
+        StageLightsArray = new SpriteRenderer[numLights];
+        StageLightsArray[0] = FarRightLight;
+        StageLightsArray[1] = MiddleRightLight;
+        StageLightsArray[2] = MiddleLeftLight;
+        StageLightsArray[3] = FarLeftLight;
     }
 
-    public static void FarLeftColorChange()
+    void SetCurrentColor(Color col)
     {
-        instance.FarLeftColorChange_Private();
+        currColor = col;
     }
 
-    void FarLeftColorChange_Private()
-    {
-        StartCoroutine(FlashSprite(FarLeftLight, FarLeftColor, flashTime));
-    }
 
     IEnumerator FlashSprite(SpriteRenderer spr, Color col, float duration)
     {

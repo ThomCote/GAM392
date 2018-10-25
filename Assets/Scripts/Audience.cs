@@ -209,43 +209,43 @@ public class Audience : MonoBehaviour {
 		}
 		else
 		{
-			//Debug.Log("IFM: " + inputFreqMargin);
-			//// If the player's making progress, don't do this...
-			//if (inputFreqMargin != 99999 && inputFreqMargin >= prevInputFreqMargin)
-			//{
-			//	// Set the input frequency counts such that the player can fix it relatively easily.
-			//	// If they get way ahead with one input we don't want it to take forever to
-			//	// get the rest back up.
+            //Debug.Log("IFM: " + inputFreqMargin);
+            //// If the player's making progress, don't do this...
+            //if (inputFreqMargin != 99999 && inputFreqMargin >= prevInputFreqMargin)
+            //{
+            //    // Set the input frequency counts such that the player can fix it relatively easily.
+            //    // If they get way ahead with one input we don't want it to take forever to
+            //    // get the rest back up.
 
-			//	// Get max input
-			//	string maxInputName = "";
-			//	int maxInputVal = 0;
-			//	foreach (KeyValuePair<string, int> kvp in inputFrequencies)
-			//	{
-			//		if (kvp.Value > maxInputVal)
-			//		{
-			//			maxInputVal = kvp.Value;
-			//			maxInputName = kvp.Key;
-			//		}
-			//	}
-			//	Dictionary<string, int> otherInputs = new Dictionary<string, int>();
-			//	foreach (KeyValuePair<string, int> kvp in inputFrequencies)
-			//	{
-			//		if (kvp.Key != maxInputName && kvp.Value != maxInputVal)
-			//		{
-			//			otherInputs.Add(kvp.Key, kvp.Value);
-			//		}
-			//	}
-			//	// Now - set the offending input to be just a little higher than the other 3
-			//	foreach (KeyValuePair<string, int> kvp in otherInputs)
-			//	{
-			//		inputFrequencies[kvp.Key] = 3;
-			//	}
-			//	inputFrequencies[maxInputName] = 12;
-			//}
+            //    // Get max input
+            //    string maxInputName = "";
+            //    int maxInputVal = 0;
+            //    foreach (KeyValuePair<string, int> kvp in inputFrequencies)
+            //    {
+            //        if (kvp.Value > maxInputVal)
+            //        {
+            //            maxInputVal = kvp.Value;
+            //            maxInputName = kvp.Key;
+            //        }
+            //    }
+            //    Dictionary<string, int> otherInputs = new Dictionary<string, int>();
+            //    foreach (KeyValuePair<string, int> kvp in inputFrequencies)
+            //    {
+            //        if (kvp.Key != maxInputName && kvp.Value != maxInputVal)
+            //        {
+            //            otherInputs.Add(kvp.Key, kvp.Value);
+            //        }
+            //    }
+            //    // Now - set the offending input to be just a little higher than the other 3
+            //    foreach (KeyValuePair<string, int> kvp in otherInputs)
+            //    {
+            //        inputFrequencies[kvp.Key] = 3;
+            //    }
+            //    inputFrequencies[maxInputName] = 12;
+            //}
 
-			// If we're below 0 but not at bored yet
-			if (curSatisValue > satisLevelThresholds[0])
+            // If we're below 0 but not at bored yet
+            if (curSatisValue > satisLevelThresholds[0])
 			{
 				// Decrease satisfaction.
 				curSatisValue -= 10;

@@ -14,6 +14,8 @@ public abstract class EnemyController : MonoBehaviour {
 
 	public SoundPlayer attackSoundPlayer;
 
+    public Slider EnemyHealthBar;
+
 	protected bool attacking;
 
 	// Use this for initialization
@@ -63,10 +65,21 @@ public abstract class EnemyController : MonoBehaviour {
 
 	}
 
+    void InitializeHealthBar()
+    {
+        EnemyHealthBar.minValue = 0;
+        EnemyHealthBar.maxValue = maxHP;
+        EnemyHealthBar.value = curHP;
+    }
+
     void UpdateHPText()
 	{
-		healthText.text = "Enemy HP: " + curHP;
-	}
+		//healthText.text = "Enemy HP: " + curHP;
+        if (curHP <= 0)
+            EnemyHealthBar.value = 0;
+        else
+            EnemyHealthBar.value = curHP;
+    }
 
 	public void ToggleAttacking()
 	{

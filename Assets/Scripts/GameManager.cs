@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour {
 	public SpriteRenderer leftSpotlight;
 	public SpriteRenderer rightSpotlight;
 
+    public float spotLightFlashTime = 0.01f;
+
+    Color DefaultSpotLightColor = new Color(1, 0.7948295f, 0, 0.5529412f);
+
 	int currentMeasure = 1;
 
 	void Awake()
@@ -46,7 +50,7 @@ public class GameManager : MonoBehaviour {
 		instance.currentMeasureText.text = "Measure: " + instance.currentMeasure;
 		instance.turnCountdownText.text = "";
 
-		leftSpotlight.color = Color.white;
+		leftSpotlight.color = DefaultSpotLightColor;
 		rightSpotlight.color = Color.clear;
 	}
 
@@ -90,22 +94,34 @@ public class GameManager : MonoBehaviour {
 
 		if (instance.nextMeasureSwitch)
 		{
-			switch (subCount)
-			{
-				case 4:
-					instance.turnCountdownText.text = "3";
-					break;
-				case 8:
-					instance.turnCountdownText.text = "2";
-					break;
-				case 12:
-					instance.turnCountdownText.text = "1";
-					break;
-			}
+            switch (subCount)
+            {
+                case 4:
+                    instance.turnCountdownText.text = "3";
+                    //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
+                    break;
+                case 8:
+                    instance.turnCountdownText.text = "2";
+                    //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
+                    break;
+                case 12:
+                    instance.turnCountdownText.text = "1";
+                    //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
+                    break;
+            }
 		}
 	}
 
-	public static void IncrementMeasure()
+    IEnumerator FlashSprite(SpriteRenderer spr, Color col, float duration)
+    {
+        spr.color = col;
+
+        yield return new WaitForSeconds(duration);
+
+        spr.color = Color.clear;
+    }
+
+    public static void IncrementMeasure()
 	{
 		instance.nextMeasureSwitch = false;
 
@@ -137,7 +153,7 @@ public class GameManager : MonoBehaviour {
 
 		if (isPlayersTurn)
 		{
-			instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
+			instance.StartCoroutine(instance.DelayedSwapEvents("Go!"));
 		}
 		else
 		{
@@ -149,13 +165,13 @@ public class GameManager : MonoBehaviour {
 	{
 		if (leftSpotlight.color == Color.clear)
 		{
-			leftSpotlight.color = Color.white;
+			leftSpotlight.color = DefaultSpotLightColor;
 			rightSpotlight.color = Color.clear;
 		}
 		else
 		{
 			leftSpotlight.color = Color.clear;
-			rightSpotlight.color = Color.white;
+			rightSpotlight.color = DefaultSpotLightColor;
 		}
 	}
 

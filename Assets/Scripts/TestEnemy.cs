@@ -40,7 +40,8 @@ public class TestEnemy : EnemyController {
     public int ChooseRandomMove()
     {
         //max range is exclusive so max is 4 for now
-        return Random.Range(0, 4);
+        //Range set to 0 because we only have 1 enemy attack
+        return Random.Range(0, 0);
     }
 
     IEnumerator WaitThenDealDamage()

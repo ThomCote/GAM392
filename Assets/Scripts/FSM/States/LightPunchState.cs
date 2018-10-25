@@ -21,11 +21,7 @@ public class LightPunchState : IState
         Debug.Log("Execute LightPunchState");
 
         ani.SetTrigger("lightpunch");
-
-        if(ani.GetBool("isTransitioning") == false)
-        {
-            sM.ChangeState("idle");
-        }
+        sM.ChangeState("idle");
        
     }
 
