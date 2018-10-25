@@ -52,11 +52,11 @@ public class GameManager : MonoBehaviour {
 		instance.currentMeasureText.text = "Measure: " + instance.currentMeasure;
 		instance.turnCountdownText.text = "";
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		leftSpotlight.color = DefaultSpotLightColor;
-=======
-		leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
->>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
+//=======
+		//leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+//>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		rightSpotlight.color = Color.clear;
 	}
 
@@ -164,13 +164,13 @@ public class GameManager : MonoBehaviour {
 
 		if (isPlayersTurn)
 		{
-<<<<<<< HEAD
-			instance.StartCoroutine(instance.DelayedSwapEvents("Go!"));
-=======
+//<<<<<<< HEAD
+//=======
 			Audience.ResetInputTracking();
-			instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
->>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
-		}
+            instance.StartCoroutine(instance.DelayedSwapEvents("Go!"));
+            //instance.StartCoroutine(instance.DelayedSwapEvents("Attack!"));
+            //>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
+        }
 		else
 		{
 			instance.StartCoroutine(instance.DelayedSwapEvents("Block!"));
@@ -181,21 +181,21 @@ public class GameManager : MonoBehaviour {
 	{
 		if (leftSpotlight.color == Color.clear)
 		{
-<<<<<<< HEAD
+//<<<<<<< HEAD
 			leftSpotlight.color = DefaultSpotLightColor;
-=======
-			leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
->>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
+//=======
+			//leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+//>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 			rightSpotlight.color = Color.clear;
 		}
 		else
 		{
 			leftSpotlight.color = Color.clear;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 			rightSpotlight.color = DefaultSpotLightColor;
-=======
-			rightSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
->>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
+//=======
+			//rightSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+//>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		}
 	}
 
