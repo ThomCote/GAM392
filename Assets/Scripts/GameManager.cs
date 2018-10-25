@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 
 	public EnemyController currentEnemy;
 
+	public SoundPlayer whiffSoundPlayer;
+
 	public int combatPhaseLength = 8;
 
 	public Text currentMeasureText;
@@ -50,7 +52,11 @@ public class GameManager : MonoBehaviour {
 		instance.currentMeasureText.text = "Measure: " + instance.currentMeasure;
 		instance.turnCountdownText.text = "";
 
+<<<<<<< HEAD
 		leftSpotlight.color = DefaultSpotLightColor;
+=======
+		leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		rightSpotlight.color = Color.clear;
 	}
 
@@ -158,6 +164,7 @@ public class GameManager : MonoBehaviour {
 
 		if (isPlayersTurn)
 		{
+<<<<<<< HEAD
 			instance.StartCoroutine(instance.DelayedSwapEvents("Go!"));
 =======
 			Audience.ResetInputTracking();
