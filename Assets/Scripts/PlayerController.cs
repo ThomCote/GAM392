@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
 	public int maxHP;
+	public float blockCooldown;
 	int curHP;
 
 	PlayerFSM fsm;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	bool defenseInputActive = false;
 
 	bool isBlocking = false;
+	bool isCoolingDown = false;
 
 	public SoundPlayer damageAudioSrc;
 
@@ -43,11 +45,10 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (defenseInputActive && inputName == "Space")
 		{
-			fsm.HandleInput(inputName);
-
-			// Only do a block if we're not already blocking - prevent stacking them.
-			if (!isBlocking)
+			// Only do a block if we're not already blocking and noton cooldown - prevent stacking them.
+			if (!isBlocking && !isCoolingDown)
 			{
+				fsm.HandleInput(inputName);
 				StartCoroutine(DoBlock());
 			}
 		}
@@ -123,6 +124,19 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() * 2.5f);
 
 		isBlocking = false;
+
+		StartCoroutine(BlockCooldown());
+
+		yield return null;
+	}
+
+	IEnumerator BlockCooldown()
+	{
+		isCoolingDown = true;
+
+		yield return new WaitForSeconds(blockCooldown);
+
+		isCoolingDown = false;
 
 		yield return null;
 	}

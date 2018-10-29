@@ -45,7 +45,7 @@ public class InputTester : MonoBehaviour {
 			if (Audience.IsInputOverdone(inputButton))
 			{
 				// Play a whiff sound I Guess
-				GameManager.PlayWhiffSound();
+				GameManager.PlayWhiffSound();                                                                                                                                                                           
 
 				return;
 			}
