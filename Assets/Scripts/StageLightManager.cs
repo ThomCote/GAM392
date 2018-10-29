@@ -11,7 +11,7 @@ public class StageLightManager : MonoBehaviour {
 
 
     private int numLights = 4;
-    private int LightIndex = 0;
+    private int LightIndex = 3;
     [SerializeField] SpriteRenderer[] StageLightsArray;
     [SerializeField] SpriteRenderer FarRightLight;
     [SerializeField] SpriteRenderer MiddleRightLight;
@@ -81,14 +81,16 @@ public class StageLightManager : MonoBehaviour {
 
     void CycleStageLights_Private()
     {
-        if(LightIndex <= 3)
+        if(LightIndex <= 2)
         {
             StartCoroutine(FlashSprite(StageLightsArray[LightIndex], currColor, flashTime));
-            LightIndex++;
+			StartCoroutine(FlashSprite(StageLightsArray[LightIndex + 1], currColor, flashTime));
+			LightIndex++;
         }
         else
         {
-            for (int i = 0; i < numLights; i++)
+			ChooseNextColor();
+			for (int i = 0; i < numLights; i++)
             {
                 StartCoroutine(FlashSprite(StageLightsArray[i], currColor, flashTime));
             }
@@ -98,7 +100,6 @@ public class StageLightManager : MonoBehaviour {
             //StartCoroutine(FlashSprite(StageLightsArray[3], currColor, flashTime));
 
             LightIndex = 0;
-            ChooseNextColor();
         }
        
     }
