@@ -110,6 +110,11 @@ public class Audience : MonoBehaviour {
 		return instance.overdoneInputs.Contains(inputName);
 	}
 
+	public static int GetBonusDamage()
+	{
+		return instance.satisLevelBonuses[instance.curSatisLevel];
+	}
+
 	// Damage from a successful (non-boring) combo adds to the satisfaction value
 	public static void OnSuccessfulCombo(int dmg)
 	{

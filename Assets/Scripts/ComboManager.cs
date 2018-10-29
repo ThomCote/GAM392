@@ -172,17 +172,20 @@ public class ComboManager : MonoBehaviour {
 	{
 		comboOngoing = false;
 
-		// Add an extra 4 points for the last note
-		currentComboDamage += 8;
-
-		// TODO - This'll involve applying the damage you've built up for your attack
-		GameManager.DamageEnemy(currentComboDamage);
-
 		// Alert audience that you've finished the combo successfully
 		if (comboNoteLengths.Count > 1)
 		{
 			Audience.OnSuccessfulCombo(currentComboDamage);
 		}
+
+		// Add an extra 4 points for the last note
+		currentComboDamage += 8;
+
+		// Add bonus damage from audience
+		currentComboDamage += Audience.GetBonusDamage();
+		Debug.Log("Bonus audience damage: " + Audience.GetBonusDamage());
+
+		GameManager.DamageEnemy(currentComboDamage);
 
 		// Reset text
 		comboText.text = "Current Combo:";
