@@ -66,6 +66,7 @@ public abstract class EnemyController : MonoBehaviour {
         RhythmManager.StopMusicAndRhythm();
         ComboManager.SetStarted(false);
         GameManager.SetCountdownText("Victory", Color.green);
+        GameManager.WinGame();
     }
 
     void InitializeHealthBar()

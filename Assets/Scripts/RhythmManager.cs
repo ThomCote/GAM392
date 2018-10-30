@@ -181,7 +181,9 @@ public class RhythmManager : MonoBehaviour {
 				curSubdivisionTime = curSubdivisionTime - eighthNoteLength;
 
 				++currentSubdivisionCount;
-				if (currentSubdivisionCount == 7)
+                OnSubdivision();
+
+                if (currentSubdivisionCount == 7)
 				{
 					// We've moved onto a new measure
 					GameManager.IncrementMeasure();
@@ -200,7 +202,7 @@ public class RhythmManager : MonoBehaviour {
 					quarterNoteCounter.text = quarterNoteCount.ToString();
 				}
 
-				OnSubdivision();
+				
 			}
 		}
 

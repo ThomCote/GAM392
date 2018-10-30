@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
 
 	bool isPlayersTurn = true;
 
+    bool hasWon = false;
+
 	public MusicPlayer musicPlayer;
 
 	public SpriteRenderer leftSpotlight;
@@ -60,7 +62,20 @@ public class GameManager : MonoBehaviour {
 		rightSpotlight.color = Color.clear;
 	}
 
-	public static PlayerController GetPlayerController()
+    private void Update()
+    {
+        if (hasWon)
+        {
+            SetCountdownText("Victory", Color.green);
+            leftSpotlight.color = DefaultSpotLightColor;
+            //=======
+            //leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            //>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
+            rightSpotlight.color = Color.clear;
+        }
+    }
+
+    public static PlayerController GetPlayerController()
 	{
 		return instance.playerController;
 	}
@@ -154,7 +169,13 @@ public class GameManager : MonoBehaviour {
 
 	void ChangeCombatPhase()
 	{
-		playerController.ToggleInputActive();
+        if (hasWon)
+        {
+            Debug.Log("Game won~");
+            return;
+        }
+
+        playerController.ToggleInputActive();
 
 		isPlayersTurn = !isPlayersTurn;
 
@@ -212,6 +233,11 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator DelayedSwapEvents(string swapText)
 	{
+        if (hasWon)
+        {
+            yield return null;
+        }
+
 		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength());
 
 		turnCountdownText.text = swapText;
@@ -223,4 +249,9 @@ public class GameManager : MonoBehaviour {
 
 		yield return null;
 	}
+
+    public static void WinGame()
+    {
+        instance.hasWon = true;
+    }
 }
