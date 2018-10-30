@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour {
 
 	public SoundPlayer whiffSoundPlayer;
 
+	public SoundPlayer[] crowdSoundPlayers;
+	public SoundPlayer metronomePlayer;
+
 	public int combatPhaseLength = 8;
 
 	public Text currentMeasureText;
@@ -60,6 +63,43 @@ public class GameManager : MonoBehaviour {
 		//leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 //>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
 		rightSpotlight.color = Color.clear;
+	}
+
+	public static void IntroCountdown(float beatLength)
+	{
+		instance.StartCoroutine(instance.IntroCountdown_Coroutine(beatLength));
+	}
+
+	IEnumerator IntroCountdown_Coroutine(float beatLength)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			metronomePlayer.PlaySound();
+
+			yield return new WaitForSeconds(beatLength);
+		}
+
+		instance.turnCountdownText.text = "3";
+		instance.crowdSoundPlayers[0].PlaySound();
+		metronomePlayer.PlaySound();
+
+		yield return new WaitForSeconds(beatLength);
+
+		instance.turnCountdownText.text = "2";
+		instance.crowdSoundPlayers[1].PlaySound();
+		metronomePlayer.PlaySound();
+
+		yield return new WaitForSeconds(beatLength);
+
+		instance.turnCountdownText.text = "1";
+		instance.crowdSoundPlayers[2].PlaySound();
+		metronomePlayer.PlaySound();
+
+		yield return new WaitForSeconds(beatLength);
+
+		turnCountdownText.text = "";
+
+		yield return null;
 	}
 
     private void Update()
@@ -124,14 +164,17 @@ public class GameManager : MonoBehaviour {
             {
                 case 4:
                     instance.turnCountdownText.text = "3";
+					instance.crowdSoundPlayers[0].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
                 case 8:
                     instance.turnCountdownText.text = "2";
+					instance.crowdSoundPlayers[1].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
                 case 12:
                     instance.turnCountdownText.text = "1";
+					instance.crowdSoundPlayers[2].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
             }

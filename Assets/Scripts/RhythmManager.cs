@@ -95,6 +95,11 @@ public class RhythmManager : MonoBehaviour {
 		// Wait for stuff to load up if it needs to elsewhere
 		yield return new WaitForSeconds(0.3f);
 
+		// Do GameManager intro countdown
+		GameManager.IntroCountdown(quarterNoteLength);
+
+		yield return new WaitForSeconds(quarterNoteLength * 8);
+
 		musicPlayer.PlayMusic(musicStartDelay);
 		yield return new WaitForSeconds(rhythmStartDelay);
 
@@ -201,8 +206,6 @@ public class RhythmManager : MonoBehaviour {
 					quarterNoteCount = (currentSubdivisionCount / 2) + 1;
 					quarterNoteCounter.text = quarterNoteCount.ToString();
 				}
-
-				
 			}
 		}
 
