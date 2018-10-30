@@ -53,6 +53,11 @@ public class ComboManager : MonoBehaviour {
 		instance.started = true;
 	}
 
+    public static void SetStarted(bool value)
+    {
+        instance.started = value;
+    }
+
 	// Update is called once per frame
 	void Update () {
 		if (!started)

@@ -54,15 +54,18 @@ public class IdleState : IState
         switch(moveIndex)
         {
             case 0:
-                sM.ChangeState("lpunch");
+                sM.ChangeState("winduppunch");
                 break;
             case 1:
-                sM.ChangeState("upper");
+                sM.ChangeState("lpunch");
                 break;
             case 2:
-                sM.ChangeState("hpunch");
+                sM.ChangeState("upper");
                 break;
             case 3:
+                sM.ChangeState("hpunch");
+                break;
+            case 4:
                 sM.ChangeState("kick");
                 break;
         }

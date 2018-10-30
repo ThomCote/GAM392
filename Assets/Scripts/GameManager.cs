@@ -204,6 +204,12 @@ public class GameManager : MonoBehaviour {
         return instance.isPlayersTurn;
     }
 
+    public static void SetCountdownText(string txt, Color col)
+    {
+        instance.turnCountdownText.text = txt;
+        instance.turnCountdownText.color = col;
+    }
+
 	IEnumerator DelayedSwapEvents(string swapText)
 	{
 		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength());

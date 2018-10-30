@@ -26,6 +26,7 @@ public class TestEnemy : EnemyController {
 		{
 			// Play warmup sound
 			attackSoundPlayer.PlaySound();
+            HandleInput(0); //windup;
 		}
 
 		// For testing, just attack every other quarter note.
@@ -41,7 +42,7 @@ public class TestEnemy : EnemyController {
     {
         //max range is exclusive so max is 4 for now
         //Range set to 0 because we only have 1 enemy attack
-        return Random.Range(0, 0);
+        return Random.Range(1, 1);
     }
 
     IEnumerator WaitThenDealDamage()

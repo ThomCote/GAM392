@@ -20,7 +20,8 @@ public abstract class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
-		curHP = maxHP;
+        EnemyHealthBar.maxValue = maxHP;
+        curHP = maxHP;
 		UpdateHPText();
 	}
 	
@@ -62,8 +63,10 @@ public abstract class EnemyController : MonoBehaviour {
 
 	void Die()
 	{
-
-	}
+        RhythmManager.StopMusicAndRhythm();
+        ComboManager.SetStarted(false);
+        GameManager.SetCountdownText("Victory", Color.green);
+    }
 
     void InitializeHealthBar()
     {

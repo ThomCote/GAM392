@@ -19,6 +19,7 @@ public class EnemyFSM : BaseFSM {
         stateMachine.AddState("kick", new KickState(this));
         stateMachine.AddState("upper", new UpperCutState(this));
         stateMachine.AddState("lpunch", new LightPunchState(this));
+        stateMachine.AddState("winduppunch", new WindUpPunchState(this));
         stateMachine.AddState("hpunch", new HeavyAttackState(this));
     }
 

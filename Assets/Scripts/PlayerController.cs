@@ -82,7 +82,9 @@ public class PlayerController : MonoBehaviour {
 
 	void Die()
 	{
-
+        GameManager.SetCountdownText("Defeat", Color.red);
+        RhythmManager.StopMusicAndRhythm();
+        ComboManager.SetStarted(false);
 	}
 
 	public void ToggleInputActive()

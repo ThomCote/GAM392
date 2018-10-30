@@ -29,6 +29,12 @@ public class MusicPlayer : MonoBehaviour {
 		audSrcHighPerc.Play();
 	}
 
+    public void StopMusic()
+    {
+        audSrcLowPerc.Stop();
+        audSrcHighPerc.Stop();
+    }
+
 	public void EnableLowPercMusic()
 	{
 		audSrcLowPerc.volume = this.volume;

@@ -83,6 +83,13 @@ public class RhythmManager : MonoBehaviour {
 		StartCoroutine(Begin());
 	}
 
+    public static void StopMusicAndRhythm()
+    {
+        instance.startedMusicAndRhythm = false;
+        instance.musicPlayer.StopMusic();
+
+    }
+
 	IEnumerator Begin()
 	{
 		// Wait for stuff to load up if it needs to elsewhere
