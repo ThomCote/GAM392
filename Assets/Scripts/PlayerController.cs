@@ -19,15 +19,23 @@ public class PlayerController : MonoBehaviour {
 
 	public SoundPlayer damageAudioSrc;
 
+    public SpriteRenderer DamageAura1;
+    public SpriteRenderer DamageAura2;
+    public SpriteRenderer DamageAura3;
+
     public Slider healthBar;
 
 	public Text hpText;
+
+    public Color AuraColor1;
+    public Color AuraColor2;
 
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
 		curHP = maxHP;
         InitializeHealthBar();
+        DeactivateAuras();
 		//UpdateHPText();
 	}
 	
@@ -39,6 +47,24 @@ public class PlayerController : MonoBehaviour {
     public void GetHurt()
     {
         fsm.GetHurt();
+    }
+
+    public void ActivateAura(int auraNum)
+    {
+        //Lol dont care anymore just want it done
+        if (auraNum == 1)
+            DamageAura1.color = AuraColor1;
+        else if (auraNum == 2)
+            DamageAura2.color = AuraColor2;
+        else if (auraNum == 3)
+            DamageAura3.color = AuraColor1;
+    }
+
+    public void DeactivateAuras()
+    {
+        DamageAura1.color = Color.clear;
+        DamageAura2.color = Color.clear;
+        DamageAura3.color = Color.clear;
     }
 
 	public void HandleInput(string inputName)

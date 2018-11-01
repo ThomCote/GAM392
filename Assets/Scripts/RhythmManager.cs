@@ -42,7 +42,10 @@ public class RhythmManager : MonoBehaviour {
 	public Text eighthNoteCounter;
 	public Text sixteenthNoteCounter;
 
-	long totalSubdivisionCount = 0;
+    public SpriteRenderer leftSpeaker;
+    public SpriteRenderer rightSpeaker;
+
+    long totalSubdivisionCount = 0;
 
 	void Awake()
 	{
@@ -149,7 +152,7 @@ public class RhythmManager : MonoBehaviour {
 				}
 
 				sixteenthNoteCounter.text = (currentSubdivisionCount + 1).ToString();
-
+          
 				if (currentSubdivisionCount % 2 == 0)
 				{
 					eighthNoteCount = (currentSubdivisionCount / 2) + 1;
@@ -165,6 +168,14 @@ public class RhythmManager : MonoBehaviour {
 
                     //StageLight Indicator
                     StageLightManager.CycleStageLights();
+                    if(GameManager.GetIsPlayersTurn() == true)
+                    {
+                        GameManager.ScaleSpeaker(leftSpeaker);
+                    }
+                    else
+                    {
+                        GameManager.ScaleSpeaker(rightSpeaker);
+                    }
 
                 }
 

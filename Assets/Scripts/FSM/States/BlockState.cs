@@ -21,7 +21,7 @@ public class BlockState : IState
     {
         Debug.Log("Execute BlockState");
 
-        ani.SetTrigger("block");
+        ani.SetTrigger("blocked");
         sM.ChangeState("idle");
     }
 

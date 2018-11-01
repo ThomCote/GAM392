@@ -346,29 +346,38 @@ public class Audience : MonoBehaviour {
 			// Tell the player to kick it up a notch
 			// TODO: Play 'Change it up!' or 'Boooooring!' voice clip
 			boringSoundPlayer.PlaySound();
+            GameManager.GetPlayerController().DeactivateAuras();
 
 			if (level == 0)
 			{
 				// For when they're reeeally angry
 				// TODO
 				booSoundPlayer.PlaySound();
-			}
+                GameManager.GetPlayerController().DeactivateAuras();
+            }
 		}
 		else
 		{
 			switch (level)
 			{
 				case 2: // Neutral
-					break;
+                    GameManager.GetPlayerController().DeactivateAuras();
+                    break;
 				case 3: // Excited
 					applauseSoundPlayer.PlaySound();
+                    GameManager.GetPlayerController().ActivateAura(1);
 					break;
 				case 4: // Wild
 					cheerSoundPlayer.PlaySound();
-					break;
+                    GameManager.GetPlayerController().ActivateAura(1);
+                    GameManager.GetPlayerController().ActivateAura(2);
+                    break;
 				case 5: // Fucking mental (give finisher)
 					cheerSoundPlayer.PlaySound();
-					break;
+                    GameManager.GetPlayerController().ActivateAura(1);
+                    GameManager.GetPlayerController().ActivateAura(2);
+                    GameManager.GetPlayerController().ActivateAura(3);
+                    break;
 			}
 		}
 

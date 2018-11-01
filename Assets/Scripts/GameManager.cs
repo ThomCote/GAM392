@@ -34,11 +34,39 @@ public class GameManager : MonoBehaviour {
 
     public float spotLightFlashTime = 0.01f;
 
+
+    public float speakerScaleTime = 0.1f;
+
+    public float speakerScaleValue = 0.1f;
+
     Color DefaultSpotLightColor = new Color(1, 0.7948295f, 0, 0.5529412f);
 
 	int currentMeasure = 1;
 
-	void Awake()
+    public static void ScaleSpeaker(SpriteRenderer speaker)
+    {
+        instance.StartCoroutine(instance.ScaleSprite(speaker, instance.speakerScaleValue, instance.speakerScaleTime));
+    }
+
+    public void StopSpeakerShake()
+    {
+
+    }
+
+    IEnumerator ScaleSprite(SpriteRenderer spr, float scale, float duration)
+    {
+        Vector3 vector = new Vector3(scale, 0, 0);
+
+        spr.transform.localScale += vector;
+
+        yield return new WaitForSeconds(duration);
+
+        spr.transform.localScale -= vector;
+
+        //StartCoroutine(ScaleSprite(spr, scale, duration));
+    }
+
+    void Awake()
 	{
 		if (!instance)
 		{

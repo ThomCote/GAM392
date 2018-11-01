@@ -68,6 +68,9 @@ public class IdleState : IState
             case 4:
                 sM.ChangeState("kick");
                 break;
+            case 5:
+                sM.ChangeState("block");
+                break;
         }
     }
 
