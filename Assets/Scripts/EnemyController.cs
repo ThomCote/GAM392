@@ -15,12 +15,14 @@ public abstract class EnemyController : MonoBehaviour {
 	public SoundPlayer attackSoundPlayer;
 
     public Slider EnemyHealthBar;
+	public Slider greyHealthBar;
 
 	protected bool attacking;
 
 	// Use this for initialization
 	protected virtual void Start () {
-        EnemyHealthBar.maxValue = maxHP;
+		//EnemyHealthBar.maxValue = maxHP;
+		InitializeHealthBar();
         curHP = maxHP;
 		UpdateHPText();
 	}
@@ -56,6 +58,11 @@ public abstract class EnemyController : MonoBehaviour {
         enemyFsm.GetHurt();
     }
 
+	public void UpdateGreyHealth(int curComboDmg)
+	{
+
+	}
+
 	protected void DealDamage(int dmg)
 	{
 		GameManager.DamagePlayer(dmg);
@@ -74,15 +81,25 @@ public abstract class EnemyController : MonoBehaviour {
         EnemyHealthBar.minValue = 0;
         EnemyHealthBar.maxValue = maxHP;
         EnemyHealthBar.value = curHP;
+
+		greyHealthBar.minValue = 0;
+		greyHealthBar.maxValue = maxHP;
+		greyHealthBar.value = curHP;
     }
 
-    void UpdateHPText()
+    public void UpdateHPText()
 	{
 		//healthText.text = "Enemy HP: " + curHP;
         if (curHP <= 0)
-            EnemyHealthBar.value = 0;
+		{
+			EnemyHealthBar.value = 0;
+			greyHealthBar.value = 0;
+		}
         else
-            EnemyHealthBar.value = curHP;
+		{
+			greyHealthBar.value = curHP;
+			EnemyHealthBar.value = curHP - ComboManager.GetCurrentComboDamage();
+		} 
     }
 
 	public void ToggleAttacking()

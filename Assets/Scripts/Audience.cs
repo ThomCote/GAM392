@@ -30,9 +30,9 @@ public class Audience : MonoBehaviour {
 		0,
 		0,
 		0,
+		10,
 		20,
-		40,
-		60 // Also will get finisher
+		30 // Also will get finisher
 	};
 
 	int numLevels = 6;

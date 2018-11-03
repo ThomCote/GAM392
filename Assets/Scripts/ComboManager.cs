@@ -26,6 +26,8 @@ public class ComboManager : MonoBehaviour {
 	public Text subsSinceLastText;
 	public Text curHitIndexText;
 
+	public EnemyController enemy;
+
 	bool started = false;
 
 	void Awake()
@@ -51,6 +53,16 @@ public class ComboManager : MonoBehaviour {
 	{
 		instance.acceptSixteenths = acceptSixteenths;
 		instance.started = true;
+	}
+
+	public static int GetCurrentComboDamage()
+	{
+		if (!instance.comboOngoing)
+		{
+			return 0;
+		}
+
+		return instance.currentComboDamage + 8 + Audience.GetBonusDamage();
 	}
 
     public static void SetStarted(bool value)
@@ -100,6 +112,9 @@ public class ComboManager : MonoBehaviour {
 
 		// Evaluate this hit's damage and add it to the total
 		AddHitDamage(subsSinceLastHit);
+
+		// Update enemy "grey health" bar
+		enemy.UpdateHPText();
 
 		lastHitSubdivisionCount = hitTotalSubdivisionCount;
 	}
@@ -227,5 +242,6 @@ public class ComboManager : MonoBehaviour {
 		lastHitSubdivisionCount = -1;
 
 		// TODO - Other effects
+		enemy.UpdateHPText();
 	}
 }
