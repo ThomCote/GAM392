@@ -27,9 +27,9 @@ public class InputTester : MonoBehaviour {
 		playerController = GameManager.GetPlayerController();
         currEnemy = GameManager.GetCurrentEnemyController();
 	}
-	
+
 	// Update is called once per frame
-	public void TriggeredUpdate ()
+	public void TriggeredUpdate()
 	{
 		if (onlyDefense && !playerController.GetDefenseInputActive())
 		{
@@ -41,17 +41,33 @@ public class InputTester : MonoBehaviour {
 		}
 		if (Input.GetButtonDown(inputButton))
 		{
+			// Testing for finisher
+			if (playerController.HasFinisher())
+			{
+				if (playerController.AwaitingSecondFinisherInput())
+				{
+					// This is the second input close enough to be "simultaneous" as the first,
+					// so trigger the finisher!
+					playerController.HandleInput("Finisher");
+				}
+				else
+				{
+					// Begin wait for second input
+					playerController.StartCoroutine(playerController.FinisherInputWait());
+				}
+			}
+
 			// If this input is currently 'overused' don't accept it and give some feedback
 			if (Audience.IsInputOverdone(inputButton))
 			{
 				// Play a whiff sound I Guess
 				GameManager.PlayWhiffSound();
 
-                //Play player animation
-                playerController.HandleInput(inputButton);
+				//Play player animation
+				playerController.HandleInput(inputButton);
 
-                // Enemy Block animation, 5 is block index
-                currEnemy.HandleInput(5);
+				// Enemy Block animation, 5 is block index
+				currEnemy.HandleInput(5);
 
 				return;
 			}
@@ -100,11 +116,11 @@ public class InputTester : MonoBehaviour {
 				// Alert the player character FSM
 				playerController.HandleInput(inputButton);
 
-                //Alert current enemy fsm its been hurt if its players turn
-                if (GameManager.GetIsPlayersTurn() == true)
-                {
-                    currEnemy.GetHurt();
-                }
+				//Alert current enemy fsm its been hurt if its players turn
+				if (GameManager.GetIsPlayersTurn() == true)
+				{
+					currEnemy.GetHurt();
+				}
 
 				// Alert the audience input tracking
 				Audience.RegisterAttackInput(inputButton);

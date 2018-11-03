@@ -13,6 +13,8 @@ public class Audience : MonoBehaviour {
 	public SoundPlayer boringSoundPlayer;
 	public SoundPlayer applauseSoundPlayer;
 
+	public PlayerController player;
+
 	List<string> overdoneInputs = new List<string>();
 
 	int[] satisLevelThresholds = new int[]
@@ -325,6 +327,9 @@ public class Audience : MonoBehaviour {
 	// Change current satisfaction level
 	void ChangeSatisfactionLevel(int level)
 	{
+		// Disable finisher attack (it'll instantly be re-enabled if level = 3)
+		player.SetFinisherActive(false);
+
 		if (level < 0 || level > 5)
 		{
 			// No exception, just don't do anything bc I'm lazy 
@@ -377,6 +382,7 @@ public class Audience : MonoBehaviour {
                     GameManager.GetPlayerController().ActivateAura(1);
                     GameManager.GetPlayerController().ActivateAura(2);
                     GameManager.GetPlayerController().ActivateAura(3);
+					player.SetFinisherActive(true);
                     break;
 			}
 		}

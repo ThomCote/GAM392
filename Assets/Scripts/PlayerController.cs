@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour {
     public Color AuraColor1;
     public Color AuraColor2;
 
+	bool hasFinisher = false;
+	bool awaitSecondInputForFinisher = false;
+	public float finisherInputWaitTime = 0.05f;
+
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
@@ -67,6 +71,32 @@ public class PlayerController : MonoBehaviour {
         DamageAura3.color = Color.clear;
     }
 
+	public void SetFinisherActive(bool b)
+	{
+		hasFinisher = b;
+	}
+
+	public bool HasFinisher()
+	{
+		return hasFinisher;
+	}
+
+	public bool AwaitingSecondFinisherInput()
+	{
+		return awaitSecondInputForFinisher;
+	}
+
+	public IEnumerator FinisherInputWait()
+	{
+		awaitSecondInputForFinisher = true;
+
+		yield return new WaitForSeconds(finisherInputWaitTime);
+
+		awaitSecondInputForFinisher = false;
+
+		yield return null;
+	}
+
 	public void HandleInput(string inputName)
 	{
 		if (defenseInputActive && inputName == "Space")
@@ -80,8 +110,21 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (attackInputActive)
 		{
-			fsm.HandleInput(inputName);
+			if (hasFinisher && inputName == "Finisher")
+			{
+				PerformFinisher();
+			}
+			else
+			{
+				fsm.HandleInput(inputName);
+			}
 		}
+	}
+
+	void PerformFinisher()
+	{
+		// Instantly kill enemy
+		GameManager.DamageEnemy(GameManager.GetCurrentEnemyController().maxHP);
 	}
 
 	public void TakeDamage(int dmg)
