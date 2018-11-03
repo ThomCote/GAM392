@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 
     public Color AuraColor1;
     public Color AuraColor2;
+	public Color AuraColor3;
 
 	bool hasFinisher = false;
 	bool awaitSecondInputForFinisher = false;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour {
         else if (auraNum == 2)
             DamageAura2.color = AuraColor2;
         else if (auraNum == 3)
-            DamageAura3.color = AuraColor1;
+            DamageAura3.color = AuraColor3;
     }
 
     public void DeactivateAuras()

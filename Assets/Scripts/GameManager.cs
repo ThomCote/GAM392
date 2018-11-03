@@ -323,7 +323,10 @@ public class GameManager : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.8f);
 
-		turnCountdownText.text = defaultSignText;
+		if (swapText != "Block!")
+		{
+			turnCountdownText.text = defaultSignText;
+		}
 
 		yield return null;
 	}
