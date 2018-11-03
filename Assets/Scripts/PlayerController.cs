@@ -74,6 +74,17 @@ public class PlayerController : MonoBehaviour {
 	public void SetFinisherActive(bool b)
 	{
 		hasFinisher = b;
+
+		if (b)
+		{
+			GameManager.SetCountdownText("Finish Him!", Color.red);
+			GameManager.SetDefaultSignText("Finish Him!");
+		}
+		else
+		{
+			GameManager.SetCountdownText("", Color.red);
+			GameManager.SetDefaultSignText("");
+		}
 	}
 
 	public bool HasFinisher()

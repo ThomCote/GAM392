@@ -43,6 +43,13 @@ public class GameManager : MonoBehaviour {
 
 	int currentMeasure = 1;
 
+	string defaultSignText = "";
+
+	public static void SetDefaultSignText(string s)
+	{
+		instance.defaultSignText = s;
+	}
+
     public static void ScaleSpeaker(SpriteRenderer speaker)
     {
         instance.StartCoroutine(instance.ScaleSprite(speaker, instance.speakerScaleValue, instance.speakerScaleTime));
@@ -125,7 +132,7 @@ public class GameManager : MonoBehaviour {
 
 		yield return new WaitForSeconds(beatLength);
 
-		turnCountdownText.text = "";
+		turnCountdownText.text = defaultSignText;
 
 		yield return null;
 	}
@@ -316,7 +323,7 @@ public class GameManager : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.8f);
 
-		turnCountdownText.text = "";
+		turnCountdownText.text = defaultSignText;
 
 		yield return null;
 	}
