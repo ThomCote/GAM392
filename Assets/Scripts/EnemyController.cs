@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public abstract class EnemyController : MonoBehaviour {
 
 	public int maxHP;
-	int curHP;
+	protected int curHP;
 
     public EnemyFSM enemyFsm;
 
@@ -105,6 +105,10 @@ public abstract class EnemyController : MonoBehaviour {
 	public void SetAttacking(bool b)
 	{
 		attacking = b;
+		if (!attacking)
+		{
+			enemyFsm.HandleInput("idle");
+		}
 	}
 
 	public bool IsAttacking()

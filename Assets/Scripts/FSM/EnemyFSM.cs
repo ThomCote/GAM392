@@ -35,7 +35,12 @@ public class EnemyFSM : BaseFSM {
         stateMachine.HandleInput(moveIndex);
     }
 
-    public override void GetHurt()
+	public override void HandleInput(string inputName)
+	{
+		stateMachine.ChangeState(inputName);
+	}
+
+	public override void GetHurt()
     {
         base.GetHurt();
     }

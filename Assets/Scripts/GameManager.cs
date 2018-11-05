@@ -244,6 +244,9 @@ public class GameManager : MonoBehaviour {
 			// If we're in the measure right before the switch
 			instance.nextMeasureSwitch = true;
 		}
+
+		// Regen player HP a lil bit
+		instance.playerController.Heal(3);
 	}
 
 	void ChangeCombatPhase()

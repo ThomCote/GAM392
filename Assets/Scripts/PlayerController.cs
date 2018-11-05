@@ -184,6 +184,17 @@ public class PlayerController : MonoBehaviour {
 		return defenseInputActive;
 	}
 
+	public void Heal(int hp)
+	{
+		curHP += hp;
+		if (curHP > maxHP)
+		{
+			curHP = maxHP;
+		}
+
+		UpdateHPText();
+	}
+
 	void UpdateHPText()
 	{
 		//hpText.text = "Player HP: " + curHP;
