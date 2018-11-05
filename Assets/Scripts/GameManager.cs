@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour {
             switch (subCount)
             {
                 case 4:
+					instance.currentEnemy.SetAttacking(false); // Stop attacking during countdown
                     instance.turnCountdownText.text = "3";
 					instance.crowdSoundPlayers[0].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
@@ -257,7 +258,7 @@ public class GameManager : MonoBehaviour {
 
 		isPlayersTurn = !isPlayersTurn;
 
-		currentEnemy.ToggleAttacking();
+		currentEnemy.SetAttacking(!isPlayersTurn);
 
 		musicPlayer.SwapMusic();
 

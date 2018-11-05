@@ -102,9 +102,9 @@ public abstract class EnemyController : MonoBehaviour {
 		} 
     }
 
-	public void ToggleAttacking()
+	public void SetAttacking(bool b)
 	{
-		attacking = !attacking;
+		attacking = b;
 	}
 
 	public bool IsAttacking()
