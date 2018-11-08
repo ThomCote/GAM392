@@ -26,7 +26,10 @@ public class HurtState : IState
 
     public override void HandleInput(string inputStr)
     {
-
+		if (inputStr == "Space")
+		{
+			sM.ChangeState("block");
+		}
     }
 
     public override void HandleInput(int moveIndex)

@@ -17,6 +17,8 @@ public abstract class EnemyController : MonoBehaviour {
     public Slider EnemyHealthBar;
 	public Slider greyHealthBar;
 
+	Animator ani;
+
 	protected bool attacking;
 
 	// Use this for initialization
@@ -25,6 +27,7 @@ public abstract class EnemyController : MonoBehaviour {
 		InitializeHealthBar();
         curHP = maxHP;
 		UpdateHPText();
+		ani = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -34,7 +37,10 @@ public abstract class EnemyController : MonoBehaviour {
 
     public void HandleInput(int moveIndex)
     {
-        enemyFsm.HandleInput(moveIndex);
+		if (attacking)
+		{
+			enemyFsm.HandleInput(moveIndex);
+		}
     }
 
 	// Behavior per-subdivision, driven by rhythm system.
@@ -108,8 +114,14 @@ public abstract class EnemyController : MonoBehaviour {
 		if (!attacking)
 		{
 			enemyFsm.HandleInput("idle");
+			// ani.SetTrigger("attacktoidle");
 		}
 	}
+
+	//public void GoToIdleAnimation()
+	//{
+	//	ani.SetTrigger("attacktoidle");
+	//}
 
 	public bool IsAttacking()
 	{

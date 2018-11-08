@@ -92,7 +92,7 @@ public class TestEnemy : EnemyController {
 		}
 
 		// For testing, just attack every other quarter note.
-		if (sub == 2 || sub == 6 || sub == 14)
+		if (sub == 2 || sub == 8 || sub == 14)
 		{
 			StartCoroutine(WaitThenDealDamage());
 		}
@@ -126,10 +126,11 @@ public class TestEnemy : EnemyController {
 
     IEnumerator WaitThenDealDamage()
 	{
+		HandleInput(ChooseRandomMove());
+		attackSoundPlayer.PlaySound();
 		// Give a small margin AFTER the beat for the player to hit block a lil late.
-		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() / 1.5f);
+		yield return new WaitForSeconds(RhythmManager.GetSubdivisionLength() * 1.5f);
         //Alert Enemy FSM
-        HandleInput(ChooseRandomMove());
 		DealDamage(punchDmg);
 	}
 }

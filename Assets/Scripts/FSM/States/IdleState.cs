@@ -16,6 +16,7 @@ public class IdleState : IState
         Debug.Log("Entering Idle State");
 
         ani = character.GetComponent<Animator>();
+		// ani.SetTrigger("attacktoidle");
     }
 
     public override void Execute()

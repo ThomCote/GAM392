@@ -190,31 +190,37 @@ public class GameManager : MonoBehaviour {
 	{
 		// Just accepting 16th notes by default for now
 
-		// Trigger any enemy behaviors
-		instance.currentEnemy.OnSubdivision(subCount);
-
 		if (instance.nextMeasureSwitch)
 		{
             switch (subCount)
             {
                 case 4:
+					// instance.currentEnemy.GoToIdleAnimation();
 					instance.currentEnemy.SetAttacking(false); // Stop attacking during countdown
+					
                     instance.turnCountdownText.text = "3";
 					instance.crowdSoundPlayers[0].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
                 case 8:
-                    instance.turnCountdownText.text = "2";
+					// instance.currentEnemy.GoToIdleAnimation();
+					instance.currentEnemy.SetAttacking(false); // Stop attacking during countdown
+					instance.turnCountdownText.text = "2";
 					instance.crowdSoundPlayers[1].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
                 case 12:
-                    instance.turnCountdownText.text = "1";
+					// instance.currentEnemy.GoToIdleAnimation();
+					instance.currentEnemy.SetAttacking(false); // Stop attacking during countdown
+					instance.turnCountdownText.text = "1";
 					instance.crowdSoundPlayers[2].PlaySound();
                     //instance.StartCoroutine(instance.FlashSprite(instance.leftSpotlight, Color.clear, instance.spotLightFlashTime));
                     break;
             }
 		}
+
+		// Trigger any enemy behaviors
+		instance.currentEnemy.OnSubdivision(subCount);
 	}
 
     IEnumerator FlashSprite(SpriteRenderer spr, Color col, float duration)
@@ -246,7 +252,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		// Regen player HP a lil bit
-		instance.playerController.Heal(3);
+		instance.playerController.Heal(4);
 	}
 
 	void ChangeCombatPhase()
@@ -261,6 +267,7 @@ public class GameManager : MonoBehaviour {
 
 		isPlayersTurn = !isPlayersTurn;
 
+		// instance.currentEnemy.GoToIdleAnimation();
 		currentEnemy.SetAttacking(!isPlayersTurn);
 
 		musicPlayer.SwapMusic();
