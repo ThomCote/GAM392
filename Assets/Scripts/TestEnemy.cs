@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestEnemy : EnemyController {
 
-	int punchDmg = 10;
+	public int punchDmg = 10;
 
 	int hpThreeFourths;
 	int hpHalf;

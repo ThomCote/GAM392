@@ -345,5 +345,7 @@ public class GameManager : MonoBehaviour {
     public static void WinGame()
     {
         instance.hasWon = true;
+
+		instance.playerController.HandleInput("win");
     }
 }

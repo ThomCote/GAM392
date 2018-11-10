@@ -117,7 +117,11 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput(string inputName)
 	{
-		if (defenseInputActive && inputName == "Space")
+		if (inputName == "win")
+		{
+			fsm.HandleInput("win");
+		}
+		else if (defenseInputActive && inputName == "Space")
 		{
 			// Only do a block if we're not already blocking and noton cooldown - prevent stacking them.
 			if (!isBlocking && !isCoolingDown)
@@ -166,6 +170,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Instantly kill enemy
 		GameManager.DamageEnemy(GameManager.GetCurrentEnemyController().maxHP);
+
+		GameManager.WinGame();
 	}
 
 	public void TakeDamage(int dmg)
@@ -195,6 +201,7 @@ public class PlayerController : MonoBehaviour {
         GameManager.SetCountdownText("Defeat", Color.red);
         RhythmManager.StopMusicAndRhythm();
         ComboManager.SetStarted(false);
+		fsm.HandleInput("lose");
 	}
 
 	public void ToggleInputActive()

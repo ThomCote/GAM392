@@ -30,6 +30,14 @@ public class HurtState : IState
 		{
 			sM.ChangeState("block");
 		}
+		else if (inputStr == "win")
+		{
+			sM.ChangeState("win");
+		}
+		else if (inputStr == "lose")
+		{
+			sM.ChangeState("lose");
+		}
     }
 
     public override void HandleInput(int moveIndex)

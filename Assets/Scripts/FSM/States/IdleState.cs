@@ -45,6 +45,12 @@ public class IdleState : IState
 			case "Space":
                 sM.ChangeState("block");
 				break;
+			case "lose":
+				sM.ChangeState("lose");
+				break;
+			case "win":
+				sM.ChangeState("win");
+				break;
 			default:
 				break;
 		}
