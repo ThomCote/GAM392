@@ -35,6 +35,12 @@ public class PlayerController : MonoBehaviour {
 	bool awaitSecondInputForFinisher = false;
 	public float finisherInputWaitTime = 0.05f;
 
+	public GameObject hitSparkPrefab;
+
+	// Order: Up, Down, Left, Right
+	public Transform[] hitSparkLocations;
+	public Color[] hitSparkInputColors;
+
 	// Use this for initialization
 	void Start () {
 		fsm = GetComponent<PlayerFSM>();
@@ -129,6 +135,29 @@ public class PlayerController : MonoBehaviour {
 			else
 			{
 				fsm.HandleInput(inputName);
+
+				GameObject hitSpark;
+
+				// Create a hit spark
+				switch (inputName)
+				{
+					case "Up":
+						hitSpark = Instantiate(hitSparkPrefab, hitSparkLocations[0].position, Quaternion.identity);
+						hitSpark.GetComponent<HitSpark>().Execute(hitSparkInputColors[0]);
+						break;
+					case "Down":
+						hitSpark = Instantiate(hitSparkPrefab, hitSparkLocations[1].position, Quaternion.identity);
+						hitSpark.GetComponent<HitSpark>().Execute(hitSparkInputColors[1]);
+						break;
+					case "Left":
+						hitSpark = Instantiate(hitSparkPrefab, hitSparkLocations[2].position, Quaternion.identity);
+						hitSpark.GetComponent<HitSpark>().Execute(hitSparkInputColors[2]);
+						break;
+					case "Right":
+						hitSpark = Instantiate(hitSparkPrefab, hitSparkLocations[3].position, Quaternion.identity);
+						hitSpark.GetComponent<HitSpark>().Execute(hitSparkInputColors[3]);
+						break;
+				}
 			}
 		}
 	}
