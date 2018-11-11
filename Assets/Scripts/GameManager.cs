@@ -185,6 +185,11 @@ public class GameManager : MonoBehaviour {
         instance.playerController.GetHurt();
     }
 
+	public static bool NotNextMeasureSwitch()
+	{
+		return !instance.nextMeasureSwitch;
+	}
+
 	// Called every subdivision of a measure
 	public static void OnSubdivision(int subCount)
 	{

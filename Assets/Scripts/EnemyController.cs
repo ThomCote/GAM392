@@ -41,6 +41,10 @@ public abstract class EnemyController : MonoBehaviour {
 		{
 			enemyFsm.HandleInput(moveIndex);
 		}
+		else
+		{
+			enemyFsm.HandleInput(6);
+		}
     }
 
 	// Behavior per-subdivision, driven by rhythm system.
@@ -113,15 +117,12 @@ public abstract class EnemyController : MonoBehaviour {
 		attacking = b;
 		if (!attacking)
 		{
-			enemyFsm.HandleInput("idle");
+			enemyFsm.HandleInput(6);
+			// enemyFsm.HandleInput("idle");
+			
 			// ani.SetTrigger("attacktoidle");
 		}
 	}
-
-	//public void GoToIdleAnimation()
-	//{
-	//	ani.SetTrigger("attacktoidle");
-	//}
 
 	public bool IsAttacking()
 	{

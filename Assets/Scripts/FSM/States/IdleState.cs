@@ -17,6 +17,7 @@ public class IdleState : IState
 
         ani = character.GetComponent<Animator>();
 		// ani.SetTrigger("attacktoidle");
+		// ani.SetTrigger("attacktoidle");
     }
 
     public override void Execute()
@@ -78,6 +79,9 @@ public class IdleState : IState
             case 5:
                 sM.ChangeState("block");
                 break;
+			case 6:
+				sM.ChangeState("idle");
+				break;
         }
     }
 

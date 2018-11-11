@@ -27,17 +27,20 @@ public class WindUpPunchState : IState {
 
     public override void HandleInput(string inputStr)
     {
-        //Going to have to check for combo inputs eventually
-		if (inputStr == "attacktoidle")
-		{
-			sM.ChangeState("idle");
-		}
+
     }
 
     public override void HandleInput(int moveIndex)
     {
-        if (moveIndex == 1)
-            sM.ChangeState("lpunch");
+		if (moveIndex == 1)
+		{
+			sM.ChangeState("lpunch");
+		}
+		else
+		{
+			ani.SetTrigger("attacktoidle");
+			sM.ChangeState("idle");
+		}
     }
 
     public override void Exit()

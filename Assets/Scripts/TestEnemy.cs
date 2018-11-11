@@ -50,7 +50,7 @@ public class TestEnemy : EnemyController {
 	void AttackPattern1(int sub)
 	{
 		// Telegraph before each attack.
-		if (sub == 0 || sub == 8)
+		if ((sub == 0 && GameManager.NotNextMeasureSwitch()) || (sub == 8 && GameManager.NotNextMeasureSwitch()))
 		{
 			// Play warmup sound
 			attackSoundPlayer.PlaySound();
@@ -58,7 +58,7 @@ public class TestEnemy : EnemyController {
 		}
 
 		// For testing, just attack every other quarter note.
-		if (sub == 4 || sub == 12)
+		if ((sub == 4 && GameManager.NotNextMeasureSwitch()) || (sub == 12 && GameManager.NotNextMeasureSwitch()))
 		{
 			StartCoroutine(WaitThenDealDamage());
 		}
@@ -67,7 +67,7 @@ public class TestEnemy : EnemyController {
 	void AttackPattern2(int sub)
 	{
 		// Telegraph before each attack.
-		if (sub == 0 || sub == 8)
+		if ((sub == 0 && GameManager.NotNextMeasureSwitch()) || (sub == 8 && GameManager.NotNextMeasureSwitch()))
 		{
 			// Play warmup sound
 			attackSoundPlayer.PlaySound();
@@ -75,7 +75,7 @@ public class TestEnemy : EnemyController {
 		}
 
 		// For testing, just attack every other quarter note.
-		if (sub == 4 || sub == 10)
+		if ((sub == 4 && GameManager.NotNextMeasureSwitch()) || (sub == 10 && GameManager.NotNextMeasureSwitch()))
 		{
 			StartCoroutine(WaitThenDealDamage());
 		}
@@ -84,7 +84,7 @@ public class TestEnemy : EnemyController {
 	void AttackPattern3(int sub)
 	{
 		// Telegraph before each attack.
-		if (sub == 0 || sub == 4 || sub == 12)
+		if (sub == 0 || (sub == 4 && GameManager.NotNextMeasureSwitch()) || (sub == 12 && GameManager.NotNextMeasureSwitch()))
 		{
 			// Play warmup sound
 			attackSoundPlayer.PlaySound();
@@ -92,7 +92,7 @@ public class TestEnemy : EnemyController {
 		}
 
 		// For testing, just attack every other quarter note.
-		if (sub == 2 || sub == 8 || sub == 14)
+		if (sub == 2 || (sub == 8 && GameManager.NotNextMeasureSwitch()) || (sub == 14 && GameManager.NotNextMeasureSwitch()))
 		{
 			StartCoroutine(WaitThenDealDamage());
 		}
@@ -101,7 +101,7 @@ public class TestEnemy : EnemyController {
 	void AttackPattern4(int sub)
 	{
 		// Telegraph before each attack.
-		if (sub == 0 || sub == 6 || sub == 12)
+		if (sub == 0 || (sub == 6 && GameManager.NotNextMeasureSwitch()) || (sub == 12 && GameManager.NotNextMeasureSwitch()))
 		{
 			// Play warmup sound
 			attackSoundPlayer.PlaySound();
@@ -109,7 +109,7 @@ public class TestEnemy : EnemyController {
 		}
 
 		// For testing, just attack every other quarter note.
-		if (sub == 2 || sub == 8 || sub == 14)
+		if (sub == 2 || (sub == 8 && GameManager.NotNextMeasureSwitch()) || (sub == 14 && GameManager.NotNextMeasureSwitch()))
 		{
 			StartCoroutine(WaitThenDealDamage());
 		}
