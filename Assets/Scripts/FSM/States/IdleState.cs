@@ -35,13 +35,13 @@ public class IdleState : IState
 				sM.ChangeState("upper");
 				break;
 			case "Down":
-				sM.ChangeState("kick");
+				sM.ChangeState("hpunch");
 				break;
 			case "Left":
 				sM.ChangeState("lpunch");
 				break;
 			case "Right":
-                sM.ChangeState("hpunch");
+                sM.ChangeState("kick");
 				break;
 			case "Space":
                 sM.ChangeState("block");
