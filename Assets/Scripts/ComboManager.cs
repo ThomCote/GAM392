@@ -12,6 +12,7 @@ public class ComboManager : MonoBehaviour {
 	public int maxComboWaitTime;
 
 	public AudioSource failSoundPlayer;
+	public SoundPlayer successSoundPlayer;
 
 	bool comboOngoing = false;
 
@@ -82,7 +83,7 @@ public class ComboManager : MonoBehaviour {
 		if (comboOngoing && currentSubTotal - lastHitSubdivisionCount > maxComboWaitTime)
 		{
 			// End ongoing combo successfully
-			FinishCombo();
+			FinishCombo_Internal();
 		}
 	}
 
@@ -188,8 +189,15 @@ public class ComboManager : MonoBehaviour {
 		currentComboDamage += hitValue;
 	}
 
-	void FinishCombo()
+	public static void FinishCombo()
 	{
+		instance.FinishCombo_Internal();
+	}
+
+	void FinishCombo_Internal()
+	{
+		successSoundPlayer.PlaySound();
+
 		comboOngoing = false;
 
 		// Alert audience that you've finished the combo successfully
@@ -226,7 +234,7 @@ public class ComboManager : MonoBehaviour {
 
 	void FailCombo_Private()
 	{
-		//failSoundPlayer.Play();
+		failSoundPlayer.Play();
 
 		comboOngoing = false;
 

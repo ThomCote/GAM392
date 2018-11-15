@@ -53,9 +53,13 @@ public abstract class EnemyController : MonoBehaviour {
 
 	public void TakeDamage(int dmg)
 	{
+		int oldHP = curHP;
+
 		curHP -= dmg;
 
 		UpdateHPText();
+
+		// StartCoroutine(HPUpdateEffect(oldHP));
 
 		if (curHP <= 0)
 		{
@@ -111,6 +115,50 @@ public abstract class EnemyController : MonoBehaviour {
 			EnemyHealthBar.value = curHP - ComboManager.GetCurrentComboDamage();
 		} 
     }
+
+	IEnumerator HPUpdateEffect(int oldHP)
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			if (curHP <= 0)
+			{
+				EnemyHealthBar.value = 0;
+				greyHealthBar.value = 0;
+			}
+			else
+			{
+				if (i % 2 == 0)
+				{
+					// greyHealthBar.value = curHP;
+					EnemyHealthBar.value = oldHP;// - ComboManager.GetCurrentComboDamage();
+				}
+				else
+				{
+					// greyHealthBar.value = curHP;
+					EnemyHealthBar.value = curHP;// - ComboManager.GetCurrentComboDamage();
+				}
+			}
+
+			for (int j = 0; j < 5; ++j)
+			{
+				yield return new WaitForEndOfFrame();
+				yield return new WaitForEndOfFrame();
+			}
+		}
+
+		if (curHP <= 0)
+		{
+			EnemyHealthBar.value = 0;
+			greyHealthBar.value = 0;
+		}
+		else
+		{
+			greyHealthBar.value = curHP;
+			EnemyHealthBar.value = curHP - ComboManager.GetCurrentComboDamage();
+		}
+
+		yield return null;
+	}
 
 	public void SetAttacking(bool b)
 	{

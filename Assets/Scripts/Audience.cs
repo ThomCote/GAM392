@@ -121,6 +121,8 @@ public class Audience : MonoBehaviour {
 	public static void OnSuccessfulCombo(int dmg)
 	{
 		instance.OnSuccessfulCombo_Internal(dmg);
+
+		// instance.applauseSoundPlayer.PlaySound();
 	}
 
 	void OnSuccessfulCombo_Internal(int dmg)

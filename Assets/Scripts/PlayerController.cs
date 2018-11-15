@@ -136,6 +136,10 @@ public class PlayerController : MonoBehaviour {
 			{
 				PerformFinisher();
 			}
+			else if (inputName == "Space")
+			{
+				ComboManager.FinishCombo();
+			}
 			else
 			{
 				fsm.HandleInput(inputName);
@@ -189,6 +193,10 @@ public class PlayerController : MonoBehaviour {
 		UpdateHPText();
 
 		damageAudioSrc.PlaySound();
+
+		GameObject hitSpark = Instantiate(hitSparkPrefab, hitSparkLocations[4].position, Quaternion.identity);
+		hitSpark.GetComponent<HitSpark>().Execute(hitSparkInputColors[4]);
+		hitSpark.GetComponent<SpriteRenderer>().sortingOrder = 9999;
 
 		if (curHP <= 0)
 		{

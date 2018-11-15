@@ -98,7 +98,7 @@ public class InputTester : MonoBehaviour {
 				// Only do this for attacks, not blocks.
 				if (timePastSubdivision < timeToNext)
 				{
-					if (!onlyDefense)
+					if (!onlyDefense && inputButton != "Space")
 					{
 						// If this is the case, we're closer to the current subdivision number
 						RhythmManager.OnInputSuccess(false);
@@ -106,7 +106,7 @@ public class InputTester : MonoBehaviour {
 				}
 				else
 				{
-					if (!onlyDefense)
+					if (!onlyDefense && inputButton != "Space")
 					{
 						// We're closer to the next subdivision number
 						RhythmManager.OnInputSuccess(true);
