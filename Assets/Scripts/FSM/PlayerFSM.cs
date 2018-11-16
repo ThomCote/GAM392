@@ -23,6 +23,7 @@ public class PlayerFSM : BaseFSM {
         stateMachine.AddState("block", new BlockState(this));
 		stateMachine.AddState("win", new WinState(this));
 		stateMachine.AddState("lose", new LoseState(this));
+        stateMachine.AddState("finish", new FinisherState(this));
     }
 
     void Update()

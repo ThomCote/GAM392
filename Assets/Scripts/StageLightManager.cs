@@ -103,6 +103,20 @@ public class StageLightManager : MonoBehaviour {
         }
        
     }
+    
+    void ActivateWinLights_private()
+    {
+        SetColorArrayAlphas(1);
+        StageLightsArray[0].color = LightColorsArray[0];
+        StageLightsArray[1].color = LightColorsArray[1];
+        StageLightsArray[2].color = LightColorsArray[2];
+        StageLightsArray[3].color = LightColorsArray[3];
+    }
+
+    public static void ActivateWinLights()
+    {
+        instance.ActivateWinLights_private();
+    }
 
     void ChooseNextColor()
     {

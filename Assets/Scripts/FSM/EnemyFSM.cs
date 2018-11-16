@@ -22,6 +22,8 @@ public class EnemyFSM : BaseFSM {
         stateMachine.AddState("winduppunch", new WindUpPunchState(this));
         stateMachine.AddState("hpunch", new HeavyAttackState(this));
         stateMachine.AddState("block", new BlockState(this));
+        stateMachine.AddState("win", new WinState(this));
+        stateMachine.AddState("lose", new LoseState(this));
     }
 
     // Update is called once per frame

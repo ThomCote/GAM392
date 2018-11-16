@@ -46,8 +46,11 @@ public class InputTester : MonoBehaviour {
 			{
 				if (playerController.AwaitingSecondFinisherInput())
 				{
-					// This is the second input close enough to be "simultaneous" as the first,
-					// so trigger the finisher!
+                    // This is the second input close enough to be "simultaneous" as the first,
+                    // so trigger the finisher!
+
+                    playerController.GetPlayerFSM().HandleInput("finish");//this is bad
+
 					playerController.HandleInput("Finisher");
 				}
 				else

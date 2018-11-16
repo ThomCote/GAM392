@@ -47,6 +47,14 @@ public abstract class EnemyController : MonoBehaviour {
 		}
     }
 
+    public void HandleInput(string inputName)
+    {
+        if (inputName == "win")
+        {
+            enemyFsm.HandleInput("win");
+        }
+    }
+
 	// Behavior per-subdivision, driven by rhythm system.
 	// Assuming 16th note subdivisions.
 	public abstract void OnSubdivision(int sub);
@@ -88,6 +96,7 @@ public abstract class EnemyController : MonoBehaviour {
         ComboManager.SetStarted(false);
         GameManager.SetCountdownText("Victory", Color.green);
         GameManager.WinGame();
+        enemyFsm.HandleInput("lose");
     }
 
     void InitializeHealthBar()

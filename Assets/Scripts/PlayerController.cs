@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     public Color AuraColor2;
 	public Color AuraColor3;
 
-	bool hasFinisher = false;
+	bool hasFinisher = true;
 	bool awaitSecondInputForFinisher = false;
 	public float finisherInputWaitTime = 0.05f;
 
@@ -98,6 +98,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		return hasFinisher;
 	}
+
+    public PlayerFSM GetPlayerFSM()
+    {
+        return fsm;
+    }
 
 	public bool AwaitingSecondFinisherInput()
 	{
@@ -172,8 +177,9 @@ public class PlayerController : MonoBehaviour {
 
 	void PerformFinisher()
 	{
-		// Instantly kill enemy
-		GameManager.DamageEnemy(GameManager.GetCurrentEnemyController().maxHP);
+
+        // Instantly kill enemy
+        GameManager.DamageEnemy(GameManager.GetCurrentEnemyController().maxHP);
 
 		GameManager.WinGame();
 	}
@@ -210,6 +216,7 @@ public class PlayerController : MonoBehaviour {
         RhythmManager.StopMusicAndRhythm();
         ComboManager.SetStarted(false);
 		fsm.HandleInput("lose");
+        GameManager.LoseGame();
 	}
 
 	public void ToggleInputActive()

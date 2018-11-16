@@ -352,5 +352,11 @@ public class GameManager : MonoBehaviour {
         instance.hasWon = true;
 
 		instance.playerController.HandleInput("win");
+        StageLightManager.ActivateWinLights();
+    }
+
+    public static void LoseGame()
+    {
+        instance.currentEnemy.HandleInput("win");
     }
 }
