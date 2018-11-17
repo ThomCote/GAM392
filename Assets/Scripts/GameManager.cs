@@ -143,9 +143,6 @@ public class GameManager : MonoBehaviour {
         {
             SetCountdownText("Victory", Color.green);
             leftSpotlight.color = DefaultSpotLightColor;
-            //=======
-            //leftSpotlight.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-            //>>>>>>> 9475b744fe88b6d7816ed39f2aaeb3b340af0625
             rightSpotlight.color = Color.clear;
         }
     }
@@ -346,6 +343,11 @@ public class GameManager : MonoBehaviour {
 
 		yield return null;
 	}
+
+    public static bool GetHasWon()
+    {
+        return instance.hasWon;
+    }
 
     public static void WinGame()
     {
